@@ -1,0 +1,42 @@
+<div class="topcoat-navigation-bar custom-header">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet">
+          <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title custom-font">SMORG</h1>
+    </div>
+    <div class="topcoat-navigation-bar__item right quarter">
+        <a class="topcoat-icon-button--quiet">
+          <span class="topcoat-icon topcoat-icon--edit"></span>
+        </a>
+    </div>
+</div>
+
+<!--<button type="button" ng-click="databaseCall();">Test Database Call</button>-->
+
+
+<form id="activity_input">
+    <div class="user_input">
+            <textarea class="activity_input" placeholder="Description"></textarea>
+    </div>
+share (public) share (private) submit to journal
+</form>
+
+<form action="/uploads" ng-upload>
+    <input type="file" name="avatar"></input>
+    <input type="submit" value="Upload" upload-submit="results(content, completed)"></input>
+</form>
+
+<!-- to test API access-->
+<div ng-repeat="data in mydata">
+    <p>{{ data.description }}</p>
+</div>
+
+
+<!--footer menu-->
+
+<div id="footer_menu">
+
+</div>
