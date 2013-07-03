@@ -8,10 +8,12 @@ body {background: #DB6F45;}
 	{{ member.loginErr }}
 	<center>
 	<form id="login">
+		<input class="login-input" type="text" ng-model="member.firstname" placeholder="First Name"/><br />
+		<input class="login-input" type="text" ng-model="member.lastname" placeholder="Last Name"/><br />
 		<input class="login-input" type="text" ng-model="member.username" placeholder="Username"/><br />
+		<input class="login-input" type="text" ng-model="member.email" placeholder="Email"/><br />
 		<input class="login-input" type="text" ng-model="member.password" placeholder="Password"/><br />
-		<button class="login-button" ng-click="memberLogin()">LOGIN</button>
-		<button class="login-button" ng-click="signUpClick()">SIGN UP</button>
+		<button class="login-button" ng-click="signUp()">SIGN UP</button>
 	</form>
 	</center>
 </div>

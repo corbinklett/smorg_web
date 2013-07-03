@@ -4,11 +4,6 @@ body {
 	background-color: #f1f1f2;
 }
 
-@font-face {
-  font-family: "PT Mono";
-  src: url("../font/PTM55FT.ttf");
-}
-
 .top-menu {
 	background: #db6f45;
 	height: 2rem;
@@ -45,4 +40,43 @@ body {
 .acc-div{
 	position:absolute;
 	z-index:1;
+}
+
+.login-box {
+	position: relative;
+	top: 4rem;
+	font-family: "Lato", sans-serif;
+	width:100%;
+	margin-top: 1rem;
+	padding:1rem;
+}
+
+.logo {
+	font-family: "PT Mono", sans-serif;
+	color: #F1f1f2;
+	font-size: 2.5rem;
+	margin:1rem;
+}
+
+.login-button {
+	font-family: "Lato", sans-serif;
+	padding: 1rem;
+	padding-top:.25rem;
+	padding-bottom:.25rem;
+	background-color: #f1f1f2;
+	border:none;
+	border-radius:.25rem;
+}
+
+.login-button:hover {
+	color:blue;
+}
+
+.login-form {
+	font-family: "PT Mono", sans-serif;
+}
+
+.logo-subtitle {
+	font-family: "Lato", sans-serif;
+	font-size: .8rem;
 }

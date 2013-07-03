@@ -6,17 +6,16 @@
   
 var smorg = angular.module('smorg', ['ui.bootstrap', 'services', 'ngCookies']);
 
-/*smorg.config(['$routeProvider', function($routeProvider) {
+smorg.config(['$routeProvider', function($routeProvider) {
 $routeProvider.    
     when('/login', {templateUrl: 'partials/login.html', controller: LoginCtrl}).
+    when('/signup', {templateUrl: 'partials/signup.html', controller: SignupCtrl}).
     when('/friends', {templateUrl: 'partials/friends.html', controller: FriendsCtrl}).
     when('/city', {templateUrl: 'partials/city.html', controller: CityCtrl}).
     when('/mine', {templateUrl: 'partials/mine.html', controller: MineCtrl}).    
     when('/logout', {templateUrl: 'partials/logout.html', controller: LogoutCtrl}).
-    otherwise({redirectTo: '/friends'});
-   
-
+    otherwise({redirectTo: '/login'});
   }]);
-*/
+
 
 

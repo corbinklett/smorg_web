@@ -6,38 +6,10 @@
 	<link rel="stylesheet" href="css/bootstrap.css" />
 	<link rel="stylesheet" href="css/styles.css"/>
   	<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+  	<link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
 </head>
 
-<body ng-controller="TestCtrl">
-	<div class="top-menu">
-	  <div class="menu-item">FRIENDS</div>
-	  <div class="menu-item">CITY</div>
-	  <div class="menu-item">MINE</div>
-	</div>
-
-	<div ng-controller="CollapseDemoCtrl" class="test">
-		<a class="std-text" ng-click="linkClicked()">{{ text }}</a>
-		
-		<div collapse="isCollapsed" id="collapseable_div">
-			<div class="create-page">Some content</div> 
-		</div>	
-	</div>
-
-	<div ng-controller="AccordionDemoCtrl" class="acc-div">
-	  <accordion close-others="oneAtATime">
-	    <accordion-group heading="Static Header">
-	      This content is straight in the template.
-	    </accordion-group>
-	    <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-	      {{group.content}}
-	    </accordion-group>
-	    <accordion-group heading="Dynamic Body Content">
-	      <p>The body of the accordion group grows to fit the contents</p>
-	        <button class="btn btn-small" ng-click="addItem()">Add Item</button>
-	        <div ng-repeat="item in items">{{item}}</div>
-	    </accordion-group>
-	  </accordion>
-	</div>
+<body ng-controller="MainCtrl">
 
 	<div id="content" ng-view></div>
 
