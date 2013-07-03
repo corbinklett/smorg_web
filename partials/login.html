@@ -1,0 +1,23 @@
+<h3>Sign In</h3>
+{{ member.loginErr }}
+<form id="login">
+	<label>Username</label>
+	<input type="text" name="m_username" ng-model="member.username"/><br />
+	<label>Password</label>
+	<input type="text" name="m_password" ng-model="member.password"/><br />
+	<button ng-click="memberLogin()">Login</button>
+</form>
+
+<h3>Sign Up</h3>
+{{ newmember.signupErr }}
+<form id="signup">
+	<label>Full Name</label>
+	<input type="text" name="nm_fullname" ng-model="newmember.fullname"/><br />
+	<label>Email</label>
+	<input type="text" name="nm_email" ng-model="newmember.email"/><br />
+	<label>Username</label>
+	<input type="text" name="nm_username" ng-model="newmember.username"/><br />
+	<label>Password</label>
+	<input type="text" name="nm_password" ng-model="newmember.password"/><br />
+	<button ng-click="memberSignUp()">Sign Up</button>
+</form>

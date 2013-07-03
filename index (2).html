@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="sbdApp">
+<head>
+	<meta charset="utf-8">
+	<title>Smorg</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/styles.css"/>
+</head>
+
+<body>
+
+	<div id="menu" ng-controller="MenuCtrl">
+		Smorg - menu bar   
+		<div ng-switch on="userLoggedIn">
+			  <span ng-switch-when="1">  
+			  <a href="#/favorites">Favorites</a>
+			  <a href="#/activities">Activities</a>
+			  <a href="#/post">Post</a>
+			  <a href="#/logout">Logout</a>
+			  </span> 
+			 <div ng-switch-default></div>
+		</div>
+	</div>
+	
+	<div id="content" ng-view></div>
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="lib/angular/angular-cookies.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+
+</body>
+</html>

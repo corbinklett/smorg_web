@@ -1,0 +1,48 @@
+/* styles.css */
+
+body {
+	background-color: #f1f1f2;
+}
+
+@font-face {
+  font-family: "PT Mono";
+  src: url("../font/PTM55FT.ttf");
+}
+
+.top-menu {
+	background: #db6f45;
+	height: 2rem;
+}
+
+.menu-item {
+	color: #f1f2f2;
+	float: left;
+	width:33.333%;
+	text-align: center;
+	line-height:2rem;
+	vertical-align: middle;
+	font-family: "Lato", sans-serif;
+}
+
+.test {
+	border-bottom:1px solid gray;
+	padding: .25rem;
+	overflow: hidden;
+	z-index:2;
+}
+
+.std-text {
+	font-family: "Lato", sans-serif;
+}
+
+.create-page {
+	margin:.5rem;
+	padding:.25rem;
+	background: gray;
+	min-height: 18rem;
+}
+
+.acc-div{
+	position:absolute;
+	z-index:1;
+}

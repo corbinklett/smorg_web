@@ -1,0 +1,11 @@
+<h3>Activities</h3>
+
+<div>
+<article ng-repeat="activity in activities">
+    <div>
+    <img src="img/activity_img/{{ activity.id_entries }}.png" />
+        <h5>{{ activity.user }} / {{ activity.description }}</h5> 
+        <button ng-click="favoriteItem(activity.id_entries)">Favorite!</button>
+    </div>
+</article>
+</div>
