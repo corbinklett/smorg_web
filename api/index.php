@@ -5,6 +5,11 @@ require 'Slim/Slim.php';
 
 $app = new \Slim\Slim();
 
+$response = $app->response();
+$response->header('Access-Control-Allow-Origin','*');
+$response->header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+$response->header('Access-Control-Request-Method', 'OPTIONS'); 
+
 $app->get('/login/:username/:password', 'getUser'); //for use with Login form
 $app->get('/login/:username', 'checkUsername'); //for use with Signup form
 $app->post('/login', 'addUser'); //for use with Signup form - add new user
@@ -16,10 +21,11 @@ $app->run();
 
 
 function getUser($user, $password) { //login by verifying user
-	$salt1 = "$87#"; $salt2 = "3@!87";
+	$salt1 = "$8!#"; $salt2 = "3@!27";
+	$pass = $password;
 	$pass = sha1($salt1 . $password . $salt2);
 	$mysqli = getConnection();
-	$result = $mysqli->query("SELECT * FROM members WHERE user = '$user' and pass = '$pass'");
+	$result = $mysqli->query("SELECT * FROM member WHERE user = '$user' and pass = '$pass'");
 	$member = $result->fetch_object();
 	echo json_encode($member);
 	$mysqli->close();
@@ -28,21 +34,23 @@ function getUser($user, $password) { //login by verifying user
 
 function checkUsername($user) { //check username when signing up new member
 	$mysqli = getConnection();
-	$result = $mysqli->query("SELECT * FROM members WHERE user = '$user'");
+	$result = $mysqli->query("SELECT * FROM member WHERE user = '$user'");
 	$member = $result->fetch_object();
 	echo json_encode($member);
 	$mysqli->close();
 }
 
 function addUser() { //save new member to database
-	$salt1 = "$87#"; $salt2 = "3@!87";
+	$salt1 = "$8!#"; $salt2 = "3@!27";
 	$app = \Slim\Slim::getInstance();
 	$request = $app->request();
-	$newmember = json_decode($request->getBody());
-	$pass = sha1($salt1 . $newmember->password . $salt2);
+	$member = json_decode($request->getBody());
+	$pass = sha1($salt1 . $member->password . $salt2);
 	$mysqli = getConnection();
-	$sql = "INSERT INTO `members` (`user`, `pass`, `email`, `fullname`) VALUES ('$newmember->username', '$pass', '$newmember->email', '$newmember->fullname')";
-	$result = $mysqli->query($sql);  
+	$sql = "INSERT INTO `member` (`user`, `pass`, `email`, `firstname`, `lastname`) VALUES ('$member->username', '$pass', '$member->email', '$member->firstname',  '$member->lastname')";
+	$result = $mysqli->query($sql);	
+	$id_member = $mysqli->insert_id;
+	echo json_encode($id_member); //echo the  previous inserted id 
 }
 
 function getActivities() {
@@ -74,9 +82,9 @@ function getFavorites($user) {
 
 function getConnection() {
 	$db_hostname = 'localhost';
-	$db_database = 'smorgasbored_test';
-	$db_username = 'root';
-	$db_password = 'Jesusisking!12';
+	$db_database = 'smorg';
+	$db_username = 'corbin';
+	$db_password = 'corbin';
 	$mysqli = new mysqli($db_hostname, $db_username, $db_password, $db_database);
 	return $mysqli;
 }

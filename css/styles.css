@@ -4,9 +4,19 @@ body {
 	background-color: #f1f1f2;
 }
 
+a {color:inherit;}
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:hover {text-decoration:none;color:inherit;}
+a:active {text-decoration:none;}
+
 .top-menu {
 	background: #db6f45;
 	height: 2rem;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index:10;
 }
 
 .menu-item {
@@ -19,27 +29,11 @@ body {
 	font-family: "Lato", sans-serif;
 }
 
-.test {
-	border-bottom:1px solid gray;
-	padding: .25rem;
-	overflow: hidden;
-	z-index:2;
-}
-
-.std-text {
-	font-family: "Lato", sans-serif;
-}
-
 .create-page {
 	margin:.5rem;
 	padding:.25rem;
 	background: gray;
 	min-height: 18rem;
-}
-
-.acc-div{
-	position:absolute;
-	z-index:1;
 }
 
 .login-box {
@@ -80,3 +74,84 @@ body {
 	font-family: "Lato", sans-serif;
 	font-size: .8rem;
 }
+
+.activity-container {
+	position:absolute;
+	margin-top:2rem;
+}
+
+.activity {
+	position: relative;
+	margin-top:.7rem;
+	width:100%;
+}
+
+.collapse-div {
+	margin-top: 1rem;
+	margin-right:.4rem;
+	margin-left:.4rem;
+	position:relative;
+	background: #d7d7d7;
+	border-radius: .25rem;
+
+}
+
+.activity-button {
+	background:#db6f45;
+	border-radius:.25rem;
+	border:none;
+	width:2rem;
+	height:2rem;
+	margin-left:.25rem;
+	padding:.3rem;
+}
+
+.profile-pic {
+    background: url('../img/users/1.jpg') no-repeat;
+    background-size:cover;
+    width:2rem;
+    height:2rem;
+    border:none;
+    border-radius:.25rem;
+    margin-left:.25rem;
+}
+
+.button-group {
+	position:absolute;
+	top:88%;
+	z-index:2;
+}
+
+.activity-span {
+	margin-left: .5rem;
+	font-family: "Lato" sans-serif;
+}
+
+.title {
+	color: #db6f45;
+}
+
+.description {
+	font-size: .8rem;
+}
+
+.goodfor {
+	color: #db6f45;
+}
+
+/* delete tmp later */
+.tmp {
+	margin-top:1.5rem;
+}
+/*from collapseable menu
+.test {
+	border-bottom:1px solid gray;
+	padding: .25rem;
+	overflow: hidden;
+	z-index:2;
+}
+
+.std-text {
+	font-family: "Lato", sans-serif;
+}
+*/

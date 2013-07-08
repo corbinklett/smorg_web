@@ -1,11 +1,72 @@
-<h3>Activities</h3>
-
-<div>
-<article ng-repeat="activity in activities">
-    <div>
-    <img src="img/activity_img/{{ activity.id_entries }}.png" />
-        <h5>{{ activity.user }} / {{ activity.description }}</h5> 
-        <button ng-click="favoriteItem(activity.id_entries)">Favorite!</button>
-    </div>
-</article>
+<div class="top-menu">
+  <div class="menu-item"><a href='#/friends'>FRIENDS</a></div>
+  <div class="menu-item"><a href='#/city'><u>CITY</u></a></div>
+  <div class="menu-item"><a href='#/mine'>MINE</a></div>
 </div>
+
+<div class="activity-container">
+
+
+	<article class="activity" ng-repeat="activity in activities">
+	    <div>
+	    <img src="img/activity_img/{{ activity.id_entries }}.png" />
+	        <h5>{{ activity.user }} / {{ activity.description }}</h5> 
+	        <button ng-click="favoriteItem(activity.id_entries)">Favorite!</button>
+	    </div>
+	</article>
+
+
+
+	<div class="activity">
+		<img src="img/activity/1.png" ng-click="itemClicked()">
+		<div class="button-group">
+			<button class="activity-button"><img src="img/icons/star.png"></button>
+			<button class="activity-button"><img src="img/icons/share.png"></button>
+			<button class="profile-pic"></button>
+		</div>	
+	</div>
+	
+	<div collapse="isCollapsed" class="collapse-div">
+		<span class="activity-span title">Centennial Olympic Park</span><br />
+		<span class="activity-span description">Description: Stroll through Atlanta's gangsta park to the tune of a classic like IAMDABES.</span><br />
+		<span class="activity-span goodfor">good for: </span><span class="activity-span description">tourism, walking, cityviews</span>
+
+	</div>
+
+
+	<div class="activity">
+		<img src="img/activity/2.png" ng-click="itemClicked()">
+		<div class="button-group">
+			<button class="activity-button"><img src="img/icons/star.png"></button>
+			<button class="activity-button"><img src="img/icons/share.png"></button>
+			<button class="profile-pic"></button>
+		</div>	
+	</div>
+
+
+
+	<div class="activity tmp">
+		<img src="img/activity/3.png" ng-click="itemClicked()">
+		<div class="button-group">
+			<button class="activity-button"><img src="img/icons/star.png"></button>
+			<button class="activity-button"><img src="img/icons/share.png"></button>
+			<button class="profile-pic"></button>
+		</div>	
+	</div>
+
+
+
+	<div class="activity tmp">
+		<img src="img/activity/4.png" ng-click="itemClicked()">
+		<div class="button-group">
+			<button class="activity-button"><img src="img/icons/star.png"></button>
+			<button class="activity-button"><img src="img/icons/share.png"></button>
+			<button class="profile-pic"></button>
+		</div>	
+	</div>
+>
+
+
+</div>
+
+

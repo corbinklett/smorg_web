@@ -3,12 +3,12 @@
 /* Services */
 
 angular.module('services', ['ngResource']).
-	factory('UserDatabase', function($resource) {
-		var UserDatabase = $resource('api/index.php/login/:username/:password');
-		return UserDatabase;
+	factory('MemberDatabase', function($resource) {
+		var MemberDatabase = $resource('http://smorgasbored.com/api/index.php/login/:username/:password');
+		return MemberDatabase;
 }).
 	factory('ActivityDatabase', function($resource) {
-		var ActivityDatabase = $resource('api/index.php/activity');
+		var ActivityDatabase = $resource('http://smorgasbored.com/api/index.php/activity');
 		return ActivityDatabase;
 }).
 	factory('FavoritesDatabase', function($resource) {

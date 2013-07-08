@@ -5,30 +5,15 @@ body {background: #DB6F45;}
 <div class="login-box">
 	<center class="logo">SMORG<span class="logo-subtitle"> WHAT TO DO?</span></center>
 
-	{{ member.loginErr }}
 	<center>
+	{{ member.signupErr }}
 	<form id="login">
 		<input class="login-input" type="text" ng-model="member.firstname" placeholder="First Name"/><br />
 		<input class="login-input" type="text" ng-model="member.lastname" placeholder="Last Name"/><br />
 		<input class="login-input" type="text" ng-model="member.username" placeholder="Username"/><br />
 		<input class="login-input" type="text" ng-model="member.email" placeholder="Email"/><br />
-		<input class="login-input" type="text" ng-model="member.password" placeholder="Password"/><br />
+		<input class="login-input" type="password" ng-model="member.password" placeholder="Password"/><br />
 		<button class="login-button" ng-click="signUp()">SIGN UP</button>
 	</form>
 	</center>
 </div>
-<!--
-<h3>Sign Up</h3>
-{{ newmember.signupErr }}
-<form id="signup">
-	<label>Full Name</label>
-	<input type="text" name="nm_fullname" ng-model="newmember.fullname"/><br />
-	<label>Email</label>
-	<input type="text" name="nm_email" ng-model="newmember.email"/><br />
-	<label>Username</label>
-	<input type="text" name="nm_username" ng-model="newmember.username"/><br />
-	<label>Password</label>
-	<input type="text" name="nm_password" ng-model="newmember.password"/><br />
-	<button ng-click="memberSignUp()">Sign Up</button>
-</form>
--->
