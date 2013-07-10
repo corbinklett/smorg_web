@@ -16,7 +16,7 @@ $app->post('/login', 'addUser'); //for use with Signup form - add new user
 $app->get('/profile/:id', 'getUserInfo'); //get user info for profile page
 $app->get('/activity', 'getActivities'); 
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
-$app->get('/favorites/:username', 'getFavorites'); //query a user's favorite items
+$app->get('/favorites/:id', 'getFavorites'); //query a user's favorite items
 
 $app->run();
 
@@ -94,12 +94,14 @@ function saveFavorite() {
 	}
 }
 
-function getFavorites($user) {
-	$sql = "SELECT entries.*, favorites.timestamp FROM entries INNER JOIN favorites ON id_entries = entry_id WHERE favorites.user = '$user' ORDER BY favorites.timestamp DESC LIMIT 16";
+function getFavorites($id) {
+	$sql = "select activity.* from activity inner join favorite on favorite.id_activity = activity.id_activity where favorite.id_member = $id order by favorite.timestamp limit 16";
 	$mysqli = getConnection();
 	$result = $mysqli->query($sql);
-	$favorites = $result->fetch_all(MYSQLI_ASSOC);
-	echo json_encode($favorites);
+	while($row = $result->fetch_assoc()) {
+		$rows[] = $row;
+	}
+	echo json_encode($rows);
 	$mysqli->close();
 }
 
