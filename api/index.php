@@ -13,7 +13,8 @@ $response->header('Access-Control-Request-Method', 'OPTIONS');
 $app->get('/login/:username/:password', 'getUser'); //for use with Login form
 $app->get('/login/:username', 'checkUsername'); //for use with Signup form
 $app->post('/login', 'addUser'); //for use with Signup form - add new user
-$app->get('/activity', 'getActivities');
+$app->get('/profile/:id', 'getUserInfo'); //get user info for profile page
+$app->get('/activity', 'getActivities'); 
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
 $app->get('/favorites/:username', 'getFavorites'); //query a user's favorite items
 
@@ -50,16 +51,25 @@ function addUser() { //save new member to database
 	$sql = "INSERT INTO `member` (`user`, `pass`, `email`, `firstname`, `lastname`) VALUES ('$member->username', '$pass', '$member->email', '$member->firstname',  '$member->lastname')";
 	$result = $mysqli->query($sql);	
 	$id_member = $mysqli->insert_id;
-//echo $id_member;	
-echo json_encode($id_member); //echo the  previous inserted id 
+	echo json_encode($id_member); //echo the  previous inserted id 
+}
+
+function getUserInfo($id) { //get member info for profile page
+	$mysqli = getConnection();
+	$result = $mysqli->query("select * from member where id_member = $id");
+	$member = $result->fetch_object();
+	echo json_encode($member);
+	$mysqli->close();
 }
 
 function getActivities() {
 	$sql = "SELECT * FROM activity ORDER BY RAND() LIMIT 16";
 	$mysqli = getConnection();
 	$result = $mysqli->query($sql);
-	$activities = $result->fetch_all(MYSQLI_ASSOC);
-	echo json_encode($activities);
+	while($row = $result->fetch_assoc()) {
+		$rows[] = $row;
+	}
+	echo json_encode($rows);
 	$mysqli->close();
 }
 
@@ -68,8 +78,20 @@ function saveFavorite() {
 	$request = $app->request();
 	$activity = json_decode($request->getBody());
 	$mysqli = getConnection();
-	$sql = "INSERT INTO favorite (`id_member`, `id_activity`) VALUES ((select id_member from member where user = '$activity->user'), '$activity->id_activity')";
-	$result = $mysqli->query($sql);
+	$sql_id = "select id_member from member where user = '$activity->user'";
+	//check to see if this user already favorited this item	
+	$result_id = $mysqli->query($sql_id);	
+	while($row = $result_id->fetch_assoc()) {
+		$id_member = $row['id_member'];
+	}
+	$result_id->close();
+	$sql_check = "select id_activity from favorite where id_activity = $activity->id_activity and id_member = $id_member"; 
+	if ($result_check = $mysqli->query($sql_check)) {	
+		if ($result_check->num_rows == 0) {
+			$sql = "INSERT INTO favorite (`id_member`, `id_activity`) VALUES ($id_member, $activity->id_activity)";	
+			$result = $mysqli->query($sql);
+		}
+	}
 }
 
 function getFavorites($user) {
@@ -84,11 +106,10 @@ function getFavorites($user) {
 function getConnection() {
 	$db_hostname = 'localhost';
 	$db_database = 'smorg';
-	$db_username = 'corbin';
-	$db_password = 'corbin';
+	$db_username = 'root';
+	$db_password = 'Jesusisking!12';
 	$mysqli = new mysqli($db_hostname, $db_username, $db_password, $db_database);
 	return $mysqli;
 }
 
 ?>
-
