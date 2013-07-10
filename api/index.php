@@ -50,11 +50,12 @@ function addUser() { //save new member to database
 	$sql = "INSERT INTO `member` (`user`, `pass`, `email`, `firstname`, `lastname`) VALUES ('$member->username', '$pass', '$member->email', '$member->firstname',  '$member->lastname')";
 	$result = $mysqli->query($sql);	
 	$id_member = $mysqli->insert_id;
-	echo json_encode($id_member); //echo the  previous inserted id 
+//echo $id_member;	
+echo json_encode($id_member); //echo the  previous inserted id 
 }
 
 function getActivities() {
-	$sql = "SELECT * FROM entries ORDER BY RAND() LIMIT 16";
+	$sql = "SELECT * FROM activity ORDER BY RAND() LIMIT 16";
 	$mysqli = getConnection();
 	$result = $mysqli->query($sql);
 	$activities = $result->fetch_all(MYSQLI_ASSOC);
@@ -67,7 +68,7 @@ function saveFavorite() {
 	$request = $app->request();
 	$activity = json_decode($request->getBody());
 	$mysqli = getConnection();
-	$sql = "INSERT INTO `favorites` (`user`, `entry_id`) VALUES ('$activity->user', '$activity->id_entries')";
+	$sql = "INSERT INTO favorite (`id_member`, `id_activity`) VALUES ((select id_member from member where user = '$activity->user'), '$activity->id_activity')";
 	$result = $mysqli->query($sql);
 }
 
@@ -90,3 +91,4 @@ function getConnection() {
 }
 
 ?>
+

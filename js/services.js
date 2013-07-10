@@ -12,7 +12,7 @@ angular.module('services', ['ngResource']).
 		return ActivityDatabase;
 }).
 	factory('FavoritesDatabase', function($resource) {
-		var FavoritesDatabase = $resource('api/index.php/favorites/:username');
+		var FavoritesDatabase = $resource('http://smorgasbored.com/api/index.php/favorites/:username');
 		return FavoritesDatabase
 });
-       
+

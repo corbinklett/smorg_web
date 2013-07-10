@@ -63,24 +63,35 @@ function FriendsCtrl($scope) {
 
 }
 
-function CityCtrl($scope) {
-   $scope.activities = ActivityDatabase.query();
-/*
+function CityCtrl($scope, $rootScope, $cookies, $location, ActivityDatabase, FavoritesDatabase) {
+ $scope.activities = ActivityDatabase.query();
+ $scope.isCollapsed = true;
+
   $scope.favoriteItem = function(id) {
-      var saveObject = new FavoritesDatabase(); 
-            saveObject.id_entries = id; 
-            saveObject.user =  $cookies.user; 
-            saveObject.$save();
+    
+//check and see if it exists, if not insert it
+     var saveObject = new FavoritesDatabase(); 
+        saveObject.id_activity = id; 
+        saveObject.user =  $cookies.user; 
+        saveObject.$save(); 
+        
+        var button_id = 'star_' + id;
+        var img = document.getElementById(button_id);
+        img.setAttribute("src", "img/icons/star_yellow.png");
   }
-*/
-    $scope.isCollapsed = true;
-     $scope.itemClicked = function() {
-    $scope.isCollapsed = !$scope.isCollapsed;
+
+  $scope.goToProfile = function(id) {
+    //$rootScope.$broadcast('visiting_profile', id);
+    $location.path('/profile/' + id);
   }
+}
+
+function MineCtrl($scope, $cookies, FavoritesDatabase) {
 
 }
 
-function MineCtrl($scope) {
+function ProfileCtrl($scope, $cookies, $routeParams) {
+  $routeParams.id;
 
 }
 
