@@ -15,6 +15,7 @@ $app->get('/login/:username', 'checkUsername'); //for use with Signup form
 $app->post('/login', 'addUser'); //for use with Signup form - add new user
 $app->get('/profile/:id', 'getUserInfo'); //get user info for profile page
 $app->get('/activity', 'getActivities'); 
+$app->get('/activity/:id', 'getFriendActivities'); //pass member ID to get friends activities
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
 $app->get('/favorites/:id', 'getFavorites'); //query a user's favorite items
 
@@ -56,7 +57,8 @@ function addUser() { //save new member to database
 
 function getUserInfo($id) { //get member info for profile page
 	$mysqli = getConnection();
-	$result = $mysqli->query("select * from member where id_member = $id");
+	$sql = "select *, (select count(*) from favorite inner join activity on favorite.id_activity = activity.id_activity where activity.id_member = $id) as fav_count, (select count(*) from friendship where id_member_friend = $id) as followers from member where id_member = $id";
+	$result = $mysqli->query($sql);
 	$member = $result->fetch_object();
 	echo json_encode($member);
 	$mysqli->close();
@@ -72,6 +74,18 @@ function getActivities() {
 	echo json_encode($rows);
 	$mysqli->close();
 }
+
+function getFriendActivities($id) {
+	$sql = "select activity.* from activity inner join friendship on activity.id_member = friendship.id_member_friend where friendship.id_member = $id order by activity.timestamp desc limit 16";
+	$mysqli = getConnection();
+	$result = $mysqli->query($sql);
+	while($row = $result->fetch_assoc()) {
+		$rows[] = $row;
+	}
+	echo json_encode($rows);
+	$mysqli->close();	
+}
+
 
 function saveFavorite() {
 	$app = \Slim\Slim::getInstance();

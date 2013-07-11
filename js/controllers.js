@@ -59,11 +59,28 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
   }
 }
 
-function FriendsCtrl($scope) {
+function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDatabase) {
+  $scope.activities = ActivityDatabase.query({id:$cookies.id_member});
+  $scope.isCollapsed = true;
 
+   $scope.favoriteItem = function(id) {
+    //check and see if it exists, if not insert it
+     var saveObject = new FavoritesDatabase(); 
+        saveObject.id_activity = id; 
+        saveObject.user =  $cookies.user; 
+        saveObject.$save(); 
+        
+        var button_id = 'star_' + id;
+        var img = document.getElementById(button_id);
+        img.setAttribute("src", "img/icons/star_yellow.png");
+  }
+
+    $scope.goToProfile = function(id) {
+    $location.path('/profile/' + id);
+  }
 }
 
-function CityCtrl($scope, $rootScope, $cookies, $location, ActivityDatabase, FavoritesDatabase) {
+function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDatabase) {
  $scope.activities = ActivityDatabase.query();
  $scope.isCollapsed = true;
 
@@ -81,18 +98,28 @@ function CityCtrl($scope, $rootScope, $cookies, $location, ActivityDatabase, Fav
   }
 
   $scope.goToProfile = function(id) {
-    //$rootScope.$broadcast('visiting_profile', id);
     $location.path('/profile/' + id);
   }
 }
 
-function MineCtrl($scope, $cookies, FavoritesDatabase) {
+function MineCtrl($scope, $cookies, FavoritesDatabase, $location) {
+  $scope.favorites = FavoritesDatabase.query({id: $cookies.id_member});
+  $scope.oneAtATime = true;
+  $scope.groups = [
+  {"title":"RECEIVED"},
+  {"title":"STARRED"},
+  {"title":"ADD CATEGORY"},
+  {"title":"SENT"},
+  {"title":"EDIT"}];
 
+  $scope.goToProfile = function(id) {
+    $location.path('/profile/' + id);
+  }
 }
 
-function ProfileCtrl($scope, $cookies, $routeParams) {
-  $routeParams.id;
-
+function ProfileCtrl($scope, $cookies, $routeParams, ProfileDatabase) {
+  $scope.isCollapsed = true;
+  $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
 }
 
 function LogoutCtrl($scope) {

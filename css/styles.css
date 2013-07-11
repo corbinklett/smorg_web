@@ -53,6 +53,13 @@ a:active {text-decoration:none;}
 	font-family: "Lato", sans-serif;
 }
 
+.send-div {
+	background: #d7d7d7;
+	margin:.3rem;
+	padding:.2rem;
+	font-family: "Lato", sans-serif;
+}
+
 .post-button-img {
 	max-height:1.3rem;
 }
@@ -199,6 +206,15 @@ a:active {text-decoration:none;}
 	vertical-align: middle;
 	font-family: "Lato", sans-serif;
 }
+
+.accordian-header {
+	font-family: "Lato", sans-serif;
+	font-color: #db6f45;
+	background: #d7d7d7;
+	width:100%;
+}
+
+
 
 .create-page {
 	margin:.5rem;

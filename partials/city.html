@@ -60,7 +60,19 @@
 		<img src="img/activity/{{ activity.id_activity }}.png" ng-click="isCollapsed=!isCollapsed">
 		<div class="button-group">
 			<button class="activity-button" ng-click="favoriteItem(activity.id_activity)"><img src="img/icons/star.png" id="star_{{ activity.id_activity }}"></button>
-			<button class="activity-button"><img src="img/icons/share.png"></button>
+			<!--<button class="activity-button"><img src="img/icons/share.png"></button>-->
+
+			<button class="activity-button dropdown-toggle">
+				<img src="img/icons/share.png">
+			</button>
+
+			<div class="dropdown-menu send-div">
+  				<label>Share With</label><input type="text" placeholder="Enter friends' names.">
+  				<label>Message</label><input type="text">
+  				<button class="post-submit smorg-button">SEND!</button>
+  			</div>
+
+
 			<button class="profile-pic" ng-click="goToProfile(activity.id_member)"><img src="img/users/{{ activity.id_member }}.png"></button>
 		</div>
 	</div>

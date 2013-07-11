@@ -5,21 +5,27 @@
 </div>
 
 <div class="activity-container">
+  <accordion close-others="oneAtATime">
+    <accordion-group heading="{{group.title}}" ng-repeat="group in groups" class="accordian-header">
+      {{group.content}}
+    </accordion-group>
+  </accordion>
 
-<article ng-repeat="activity in activities">
+<!--
+<article ng-repeat="favorite in favorites">
 	<div class="activity">
-		<img src="img/activity/{{ activity.id_activity }}.png" ng-click="isCollapsed=!isCollapsed">
+		<img src="img/activity/{{ favorite.id_activity }}.png" ng-click="isCollapsed=!isCollapsed">
 		<div class="button-group">
-			<button class="activity-button" ng-click="favoriteItem(activity.id_activity)"><img src="img/icons/star.png" id="star_{{ activity.id_activity }}"></button>
+			<button class="activity-button"><img src="img/icons/star_yellow.png" id="star_{{ favorite.id_activity }}"></button>
 			<button class="activity-button"><img src="img/icons/share.png"></button>
-			<button class="profile-pic"><img src="img/users/{{ activity.id_member }}.png"></button>
+			<button class="profile-pic" ng-click="goToProfile(favorite.id_member)"><img src="img/users/{{ favorite.id_member }}.png"></button>
 		</div>
 	</div>
-	<div collapse="isCollapsed" class="collapse-div" id="{{ activity.id_activity }}">
-		<span class="activity-span title">{{ activity.title }}</span><br />
-		<span class="activity-span description">Description: {{ activity.description }}</span><br />
-		<span class="activity-span goodfor">good for: </span><span class="activity-span description">{{ activity.goodfor }}</span>
+	<div collapse="isCollapsed" class="collapse-div" id="{{ favorite.id_activity }}">
+		<span class="activity-span title">{{ favorite.title }}</span><br />
+		<span class="activity-span description">Description: {{ favorite.description }}</span><br />
+		<span class="activity-span goodfor">good for: </span><span class="activity-span description">{{ favorite.goodfor }}</span>
 	</div>
 </article>
-
+-->
 </div>

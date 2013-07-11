@@ -8,11 +8,16 @@ angular.module('services', ['ngResource']).
 		return MemberDatabase;
 }).
 	factory('ActivityDatabase', function($resource) {
-		var ActivityDatabase = $resource('http://smorgasbored.com/api/index.php/activity');
+		var ActivityDatabase = $resource('http://smorgasbored.com/api/index.php/activity/:id'); //include id if you want to get friend feed
 		return ActivityDatabase;
 }).
 	factory('FavoritesDatabase', function($resource) {
-		var FavoritesDatabase = $resource('http://smorgasbored.com/api/index.php/favorites/:username');
-		return FavoritesDatabase
+		var FavoritesDatabase = $resource('http://smorgasbored.com/api/index.php/favorites/:id');
+		return FavoritesDatabase;
+}).
+	factory('ProfileDatabase', function($resource) {
+		var ProfileDatabase = $resource('http://smorgasbored.com/api/index.php/profile/:id');
+		return ProfileDatabase;
 });
+
 
