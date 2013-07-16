@@ -83,6 +83,14 @@ function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDat
 function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDatabase) {
  $scope.activities = ActivityDatabase.query();
  $scope.isCollapsed = true;
+ $scope.scroll = 0;
+/* $scope.$watch('scroll', function() {
+  var navbar = $(".smorg-navbar");
+  if ($scope.scroll > 50 && $scope.scroll < 90) {
+    navbar.css({"top": 50 - $scope.scroll});
+  }
+});*/
+ 
 
   $scope.favoriteItem = function(id) {
     

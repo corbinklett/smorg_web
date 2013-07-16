@@ -4,63 +4,60 @@ body {
 	background-color: #f0f1f1;
 }
 
+/* Resets */
 a {color:inherit;}
 a:link {text-decoration:none;}
 a:visited {text-decoration:none;}
 a:hover {text-decoration:none;color:inherit;}
 a:active {text-decoration:none;}
 
-.top-menu {
+/* Top Navigation Bar */
+.smorg-navbar {
+	position: fixed;
+	min-height:40px;
+	width:100%;
+	background: #db6f44;
+	z-index: 10;
+	top: 0px;
+}
+.smorg-item {
+	font-size: 14px;
+	min-height:40px;
+	line-height: 40px;
+	vertical-align: middle;
+	font-family: "Lato", sans-serif;
+	background: #db6f44;
+	float:left;
+	width:33.33%;
+	text-align:center;
+	color: #f0f1f1;
+}
+.smorg-active {
+	background: #e28c69;
+}
+
+/* Footer Menu */
+.smorg-footmenu {
+	background: #db6f44;
+	min-height:40px;
+	bottom: 0;
+	z-index: 9;
+	width: 100%;
 	background: #db6f44;
 	position: fixed;
-	top: 0;
-	z-index:10;
+}
+.smorg-foot {
+	display: inline-block;
+	width:50%;
+}
+.smorg-foot-left {
+	width: 49%;
+	z-index:2;
+	border-right: 1px #f0f1f1 solid;
 }
 
-.post-bar {
-	position:absolute;
-	margin-top:2rem;
-	z-index:3;
-	width:100%;
-}
 
-.post-menu {
-	height:2rem;
-	width:100%;
-	line-height:2rem;
-	vertical-align:middle;
-}
-
-.search-div {
-	position:relative;
-}
-
-.post-menu-collapse {
-	border-bottom: inset gray 1px;
-	width:100%;
-	padding: .3rem;
-	background: #d7d7d7;
-	font-family: "Lato", sans-serif;
-}
-
-.dropdown-div {
-	background: #d7d7d7;
-	margin:.3rem;
-	padding:.2rem;
-	width:85%;
-	font-family: "Lato", sans-serif;
-}
-
-.send-div {
-	background: #d7d7d7;
-	margin:.3rem;
-	padding:.2rem;
-	font-family: "Lato", sans-serif;
-}
-
-.post-button-img {
-	max-height:1.3rem;
-}
+/*Other CSS, clean out later */
 
 .search-button {
 	float:right;
