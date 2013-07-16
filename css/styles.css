@@ -12,7 +12,6 @@ a:active {text-decoration:none;}
 
 .top-menu {
 	background: #db6f44;
-	height: 5%;
 	position: fixed;
 	top: 0;
 	z-index:10;

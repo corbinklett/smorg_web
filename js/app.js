@@ -12,7 +12,7 @@ $routeProvider.
     when('/signup', {templateUrl: 'partials/signup.html', controller: SignupCtrl}).
     when('/friends', {templateUrl: 'partials/friends.html', controller: FriendsCtrl}).
     when('/city', {templateUrl: 'partials/city.html', controller: CityCtrl}).
-    when('/mine', {templateUrl: 'partials/mine.html', controller: MineCtrl}).
+    when('/profile', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).
     when('/profile/:id', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).
     when('/profile', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).    
     when('/logout', {templateUrl: 'partials/logout.html', controller: LogoutCtrl}).
