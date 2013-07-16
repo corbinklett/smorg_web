@@ -11,6 +11,32 @@ a:visited {text-decoration:none;}
 a:hover {text-decoration:none;color:inherit;}
 a:active {text-decoration:none;}
 
+/* General */
+h1 {
+	color: #db6f44;
+	font-size:16px;
+	font-family: "Lato", sans-serif;
+	text-transform: uppercase;
+	display:inline;
+	padding-bottom: 0px;
+	line-height: 16px;
+	font-weight:normal;
+}
+p {
+	font-family: "Lato", sans-serif;
+	color: #6d6d6d;
+	display: inline;
+	line-height:16px;
+}
+button {
+	border: none;
+	background: #db6f44;
+	font-family: "Lato", sans-serif;
+}
+.smorg-opaque {
+	opacity:.7;
+}
+
 /* Top Navigation Bar */
 .smorg-navbar {
 	position: fixed;
@@ -56,6 +82,76 @@ a:active {text-decoration:none;}
 	border-right: 1px #f0f1f1 solid;
 }
 
+/* Profile Page */
+.back-button-div {
+	float:left;
+	height:40px;
+	background:none;
+	border:none;
+	border-right:solid 1px #d7d7d7;
+}
+.back-button {
+	background:none;
+	border:none;
+	height:40px;
+	width:40px;
+}
+.back-button-img {
+	max-height:20px;
+	line-height:40px;
+	vertical-align: middle;
+}
+.profile-menu {
+	padding-right:20px;
+	color: #f0f1f1;
+	float: right;
+	line-height:40px;
+	vertical-align: middle;
+	font-family: "Lato", sans-serif;
+}
+.profile-head {
+	height: 100px;
+	top:50px;
+	position:fixed;
+	border-radius: 5px;
+	margin-right:5px;
+	margin-left: 5px;
+	background: #d7d7d7;
+}
+.person-container {
+	position:relative;
+	top:50px;
+	height:180px;
+}
+.user-pic {
+	position:absolute;
+	left:0;
+	top:0;
+	max-height:180px;
+}
+.user-data {
+	position:absolute;
+	background-color: rgba(249,249,249,.6);
+	top:20px;
+	left:130px;
+	right:0;
+	height:130px;
+	z-index: 2;
+	text-align:right;
+	padding-right: 5px;
+}
+.profile-activities-container {
+	position: relative;
+	top: 50px;
+	margin-left: 5px;
+	margin-right:5px;
+	height:500px;
+	background-color: rgba(230, 230, 230, .8);
+}
+
+
+
+
 
 /*Other CSS, clean out later */
 
@@ -74,46 +170,16 @@ a:active {text-decoration:none;}
 	color: #aeaeae;
 }
 
-.back-button-div {
-	float:left;
-	height:2rem;
-	background:none;
-	border:none;
-	border-right:solid 1px #d7d7d7;
+.profile-pic {
+	background-size:cover;
+	padding: 0;
+    width:2rem;
+    height:2rem;
+    border:none;
+    border-radius:.25rem;
+    margin-left:.25rem;
 }
 
-.back-button {
-	background:none;
-	border:none;
-	height:2rem;
-	width:2rem;
-}
-
-.back-button-img {
-	max-height:1rem;
-	line-height:2rem;
-	vertical-align: middle;
-}
-
-.profile-menu {
-	padding-right:1rem;
-	color: #f1f2f2;
-	float: right;
-	line-height:2rem;
-	vertical-align: middle;
-	font-family: "Lato", sans-serif;
-}
-
-.profile-head {
-	height: 5rem;
-	top:2.5rem;
-	position:fixed;
-	border-radius: .25rem;
-	margin-right:.5rem;
-	margin-left: .5rem;
-	width: 100%;
-	background: #d7d7d7;
-}
 
 .image-input {
 	opacity: 0;
@@ -147,11 +213,7 @@ a:active {text-decoration:none;}
 	line-height: 0;
 }
 
-.user-pic {
-	position:relative;
-	max-height:4.5rem;
-	vertical-align: middle;
-}
+
 
 .post-section {
 	margin: .5rem;
@@ -187,10 +249,6 @@ a:active {text-decoration:none;}
 	margin-top:3.5rem;
 }
 
-.profile-container {
-	position:absolute;
-	margin-top:2.5rem;
-}
 
 .menu-item {
 	color: #f1f2f2;
@@ -254,16 +312,6 @@ a:active {text-decoration:none;}
 	padding:.3rem;
 }
 
-.profile-pic {
-	background-size:cover;
-	padding: 0;
-    width:2rem;
-    height:2rem;
-    border:none;
-    border-radius:.25rem;
-    margin-left:.25rem;
-}
-
 .button-group {
 	position:absolute;
 	top:88%;
@@ -286,16 +334,3 @@ a:active {text-decoration:none;}
 .goodfor {
 	color: #db6f44;
 }
-
-/*from collapseable menu
-.test {
-	border-bottom:1px solid gray;
-	padding: .25rem;
-	overflow: hidden;
-	z-index:2;
-}
-
-.std-text {
-	font-family: "Lato", sans-serif;
-}
-*/

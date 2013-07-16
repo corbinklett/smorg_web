@@ -13,7 +13,7 @@ $routeProvider.
     when('/friends', {templateUrl: 'partials/friends.html', controller: FriendsCtrl}).
     when('/city', {templateUrl: 'partials/city.html', controller: CityCtrl}).
     when('/profile/:id', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).
-    when('/profile', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).    
+    when('/home', {templateUrl: 'partials/home.html', controller: HomeCtrl}).    
     when('/logout', {templateUrl: 'partials/logout.html', controller: LogoutCtrl}).
     otherwise({redirectTo: '/login'});
   }]);

@@ -111,10 +111,17 @@ function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDataba
 }
 
 function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase) {
-  $scope.favorites = FavoritesDatabase.query({id: $cookies.id_member});
+  $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
+
+  $scope.goToProfile = function(id) {
+    $location.path('/profile/' + id);
+  }
+}
+
+function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase) {
+  $scope.favorites = FavoritesDatabase.query({id: $cookies.id_member}); 
   $scope.oneAtATime = true;
   $scope.isCollapsed = true;
-  $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
   $scope.groups = [
   {"title":"RECEIVED"},
   {"title":"STARRED"},
@@ -122,9 +129,6 @@ function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $locatio
   {"title":"SENT"},
   {"title":"EDIT"}];
 
-  $scope.goToProfile = function(id) {
-    $location.path('/profile/' + id);
-  }
 }
 
 function LogoutCtrl($scope) {
