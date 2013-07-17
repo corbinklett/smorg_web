@@ -4,7 +4,7 @@
 // Declare app level module which depends on filters, and services
 //angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers']).
   
-var smorg = angular.module('smorg', ['ui.bootstrap', 'services', 'ngCookies', 'directives']);
+var smorg = angular.module('smorg', ['ui.bootstrap', 'services', 'ngCookies', 'directives', 'stellar.directives']);
 
 smorg.config(['$routeProvider', function($routeProvider) {
 $routeProvider.    

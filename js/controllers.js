@@ -110,8 +110,9 @@ function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDataba
   }
 }
 
-function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase) {
+function ProfileCtrl($scope, stellar, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase) {
   $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
+   stellar.against(window);
 
   $scope.goToProfile = function(id) {
     $location.path('/profile/' + id);
