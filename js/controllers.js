@@ -83,6 +83,14 @@ function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDat
 function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDatabase) {
  $scope.activities = ActivityDatabase.query();
  $scope.isCollapsed = true;
+ $scope.scroll = 0;
+/* $scope.$watch('scroll', function() {
+  var navbar = $(".smorg-navbar");
+  if ($scope.scroll > 50 && $scope.scroll < 90) {
+    navbar.css({"top": 50 - $scope.scroll});
+  }
+});*/
+ 
 
   $scope.favoriteItem = function(id) {
     
@@ -102,9 +110,19 @@ function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDataba
   }
 }
 
-function MineCtrl($scope, $cookies, FavoritesDatabase, $location) {
-  $scope.favorites = FavoritesDatabase.query({id: $cookies.id_member});
+function ProfileCtrl($scope, stellar, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase) {
+  $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
+   stellar.against(window);
+
+  $scope.goToProfile = function(id) {
+    $location.path('/profile/' + id);
+  }
+}
+
+function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase) {
+  $scope.favorites = FavoritesDatabase.query({id: $cookies.id_member}); 
   $scope.oneAtATime = true;
+  $scope.isCollapsed = true;
   $scope.groups = [
   {"title":"RECEIVED"},
   {"title":"STARRED"},
@@ -112,14 +130,6 @@ function MineCtrl($scope, $cookies, FavoritesDatabase, $location) {
   {"title":"SENT"},
   {"title":"EDIT"}];
 
-  $scope.goToProfile = function(id) {
-    $location.path('/profile/' + id);
-  }
-}
-
-function ProfileCtrl($scope, $cookies, $routeParams, ProfileDatabase) {
-  $scope.isCollapsed = true;
-  $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
 }
 
 function LogoutCtrl($scope) {
