@@ -4,7 +4,7 @@
 // Declare app level module which depends on filters, and services
 //angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers']).
   
-var smorg = angular.module('smorg', ['ui.bootstrap', 'services', 'ngCookies', 'directives', 'stellar.directives']);
+var smorg = angular.module('smorg', ['ui.bootstrap', 'services', 'ngCookies', 'directives', 'stellar.directives', 'imageupload']);
 
 smorg.config(['$routeProvider', function($routeProvider) {
 $routeProvider.    
@@ -15,6 +15,7 @@ $routeProvider.
     when('/profile/:id', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).
     when('/home', {templateUrl: 'partials/home.html', controller: HomeCtrl}).    
     when('/logout', {templateUrl: 'partials/logout.html', controller: LogoutCtrl}).
+    when('/upload', {templateUrl: 'partials/upload.html', controller: UploadCtrl}).
     otherwise({redirectTo: '/login'});
   }]);
 

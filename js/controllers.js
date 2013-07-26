@@ -135,3 +135,7 @@ function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase) {
 function LogoutCtrl($scope) {
 
 }
+
+function UploadCtrl($scope) {
+  
+}

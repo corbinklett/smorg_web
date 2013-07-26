@@ -1,0 +1,11 @@
+<div>
+
+<input type="file" accept="image/*" capture="camera" multiple
+    image="images"
+    resize-max-height="300"
+    resize-max-width="250"
+    resize-quality="0.7" />
+Originals <img ng-repeat="img in images" ng-src="{{img.url}}" type="{{img.file.type}}" />
+Resized <img ng-repeat="img in images" ng-src="{{img.resized.dataURL}}" />
+
+</div>
