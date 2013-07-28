@@ -18,6 +18,7 @@ $app->get('/activity', 'getActivities');
 $app->get('/activity/:id', 'getFriendActivities'); //pass member ID to get friends activities
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
 $app->get('/favorites/:id', 'getFavorites'); //query a user's favorite items
+$app->post('/post_activity', 'postActivity');
 
 $app->run();
 
@@ -117,6 +118,21 @@ function getFavorites($id) {
 	}
 	echo json_encode($rows);
 	$mysqli->close();
+}
+
+function postActivity() {
+	$app = \Slim\Slim::getInstance();
+	$request = $app->request();
+	$activity = json_decode($request->getBody());
+	$mysqli = getConnection();
+	$sql = "INSERT into `activity` (`id_member`, `title`, `description`, `goodfor`) VALUES ($activity->id_member, '$activity->title', '$activity->description', '$activity->goodfor')";	
+	$result = $mysqli->query($sql);	
+	$id_activity = $mysqli->insert_id;
+
+	$upload_path = "../img/activity/";
+	$tmp_file = $_FILES["file"]["tmp_name"];
+	$new_file = $id_activity;
+	move_uploaded_file($tmp_file, $upload_path . $new_file);
 }
 
 function getConnection() {
