@@ -129,9 +129,13 @@ function postActivity() {
 	$result = $mysqli->query($sql);	
 	$id_activity = $mysqli->insert_id;
 
+	echo json_encode($_FILES);
+	$temp = explode(".", $_FILES["photo"]["name"]);
+	$ext = end($temp);
+
 	$upload_path = "../img/activity/";
-	$tmp_file = $_FILES["file"]["tmp_name"];
-	$new_file = $id_activity;
+	$tmp_file = $_FILES["photo"]["tmp_name"];
+	$new_file = $id_activity . $ext;
 	move_uploaded_file($tmp_file, $upload_path . $new_file);
 }
 
