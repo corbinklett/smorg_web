@@ -156,9 +156,13 @@ function UploadCtrl($scope, $cookies, SearchTag) {
     }
   };
 
-  $scope.searchTag = function(tag) {
-    $scope.tag_results = SearchTag.query({tag: tag});
+  $scope.searchTag = function() {
+    if ($scope.tag) {
+    $scope.tag_results = SearchTag.query({tag: $scope.tag});
+    }
+    else {
+      $scope.tag_results = [];
+    }
   }
-
 
 }
