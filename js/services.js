@@ -18,6 +18,10 @@ angular.module('services', ['ngResource']).
 	factory('ProfileDatabase', function($resource) {
 		var ProfileDatabase = $resource('http://smorgasbored.com/api/index.php/profile/:id');
 		return ProfileDatabase;
-});
+}).
+	factory('SearchTag', function($resource) {
+		var SearchTag = $resource('http://smorgasbored.com/api/index.php/search_tag/:tag');
+		return SearchTag;
+	});
 
 

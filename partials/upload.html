@@ -23,35 +23,13 @@
        </p>
        		<input type="hidden" name="id_member" ng-model="activity.id_member" value="{{ id_member }}" />
    </form>
-   <div class="alert alert-info">Server Response: {{response | json}}</div>
-   <div>
-       Fullname: <b>{{response.fullname}}</b><br />
-       Gender: <b>{{response.gender}}</b><br />
-       Favourite Color: <span ng-style="response.style">{{response.color}}</span><br />
-       Picture: {{response.pictureUrl}}
-   </div>
 
-
-
-
-<!--
-<form ng-submit="submit()">
-	<label>Activity</label><input type="text" ng-model="activity.name" />
-	<label>Good For</label><input type="text" ng-model="activity.goodfor" />
+	<br /><br />
 	
-	<input type="file" ng-model="activity.file" />
+	<input type="text" ng-model="tag" onchange="searchTag(tag)" />
+	<div ng-repeat="result in tag_results">
+		<p>{{ result.tag_text }}</p>
+	</div>
 
-	<input type="file" ng-model="activity.photo" accept="image/*" multiple
-	    image="images"
-	    resize-max-height="300"
-	    resize-max-width="250"
-	    resize-quality="0.7" />
-	Originals <img ng-repeat="img in images" ng-src="{{img.url}}" type="{{img.file.type}}" />
-	Resized <img ng-repeat="img in images" ng-src="{{img.resized.dataURL}}" />
-
-      <input type="submit" id="submit" value="Submit" />
-      <pre>things={{activity}}</pre>
-    </form>
--->
 
 </div>

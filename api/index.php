@@ -19,6 +19,7 @@ $app->get('/activity/:id', 'getFriendActivities'); //pass member ID to get frien
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
 $app->get('/favorites/:id', 'getFavorites'); //query a user's favorite items
 $app->post('/post_activity', 'postActivity');
+$app->get('/search_tag/:tag', 'searchTag');
 
 $app->run();
 
@@ -195,6 +196,17 @@ function postActivity() {
 		$sql = "insert into `goodfor` (`id_tag`, `id_activity`) values ($tag, $id_activity)";
 		$mysqli->query($sql);
 	}
+}
+
+function searchTag($tag) {
+	$sql = "select tag_text from tag where tag_text like '$tag'" . "% limit 20";
+	$mysqli = getConnection();
+	$result = $mysqli->query($sql);
+	while($row = $result->fetch_assoc()) {
+		$rows[] = $row;
+	}
+	echo json_encode($rows);
+	$mysqli->close();
 }
 
 

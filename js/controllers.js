@@ -136,7 +136,7 @@ function LogoutCtrl($scope) {
 
 }
 
-function UploadCtrl($scope, $cookies) {
+function UploadCtrl($scope, $cookies, SearchTag) {
     $scope.id_member = $cookies.id_member;
 
     /* From ngUpload directive */
@@ -156,5 +156,9 @@ function UploadCtrl($scope, $cookies) {
     }
   };
 
-  
+  $scope.searchTag = function(tag) {
+    $scope.tag_results = SearchTag.query({tag: tag});
+  }
+
+
 }
