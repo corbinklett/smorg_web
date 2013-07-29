@@ -70,9 +70,24 @@ function getActivities() {
 	$mysqli = getConnection();
 	$result = $mysqli->query($sql);
 	while($row = $result->fetch_assoc()) {
-		$rows[] = $row;
+		$activities[] = $row;
 	}
-	echo json_encode($rows);
+	$result->close();
+
+	$i=0;
+	foreach($activities as $activity) {
+		$id_activity = $activity["id_activity"];
+		$sql = "select tag_text from tag inner join goodfor on tag.id_tag = goodfor.id_tag where goodfor.id_activity = $id_activity";
+		$result = $mysqli->query($sql);
+		while($row = $result->fetch_assoc()) {
+			$goodfor = $row . ", " . $goodfor;
+		}
+		$goodfor = substr($goodfor, 0, strlen($goodfor)-2);
+		$activities[$i]["goodfor"] = $goodfor;
+		$i++;
+	}
+	echo json_encode($activities);
+	$result->close();
 	$mysqli->close();
 }
 
@@ -121,23 +136,50 @@ function getFavorites($id) {
 }
 
 function postActivity() {
-	$app = \Slim\Slim::getInstance();
-	$request = $app->request();
-	$activity = json_decode($request->getBody());
 	$mysqli = getConnection();
-	$sql = "INSERT into `activity` (`id_member`, `title`, `description`, `goodfor`) VALUES ($activity->id_member, '$activity->title', '$activity->description', '$activity->goodfor')";	
-	$result = $mysqli->query($sql);	
-	$id_activity = $mysqli->insert_id;
+	$id_member = $_POST["id_member"];
+	$title = $_POST["title"];
+	$description = $_POST["description"];
+	$goodfor = $_POST["goodfor"];
 
-	echo json_encode($_FILES);
+	//parse tags and insert each into tag table if they don't exist
+	$goodfor_array = explode(',', $goodfor);
+	foreach ($goodfor_array as $tag) {
+		$sql = "select * from tag where tag_text = '$tag'";
+		$result = $mysqli->query($sql);
+		if ($result->num_rows == 0) {
+			$sql = "insert into `tag` (`tag_text`) values ('$tag')";
+			$id_tag[] = $mysqli->insert_id;
+		}
+		else {
+			$queried_result = $mysqli->fetch_object();
+			$id_tag[] = $queried_result["id_tag"];
+		}
+		$result->close();
+	}
+
+	// Insert activity into DB and save picture in img/activity folder
+	$sql = "insert into `activity` (`id_member`, `title`, `description`) values ($id_member, '$title', '$description')";
+	$result = $mysqli->query($sql);
+	$id_activity = $mysqli->insert_id;
+	$result->close();
+
 	$temp = explode(".", $_FILES["photo"]["name"]);
 	$ext = end($temp);
 
 	$upload_path = "../img/activity/";
 	$tmp_file = $_FILES["photo"]["tmp_name"];
-	$new_file = $id_activity . $ext;
+	$new_file = $id_activity . "." . $ext;
 	move_uploaded_file($tmp_file, $upload_path . $new_file);
+
+	//Use id_tag array to and id_activity to insert tags into goodfor table
+	foreach($id_tag as $tag) {
+		$sql = "insert into `goodfor` (`id_tag`, `id_activity`) values ($tag, $id_activity)";
+		$result = $mysqli->query($sql);
+	}
+	$result->close();
 }
+
 
 function getConnection() {
 	$db_hostname = 'localhost';
