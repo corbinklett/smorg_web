@@ -37,9 +37,27 @@
 
 </div>
 
+<!--div for search -->
+<div class="smorg-search">
+	<div class="smorg-search-results" ng-repeat="result in tag_results">
+		<ul class="smorg-search-ul">
+		<li>{{ result.tag_text }}</li><!--link tag that will take to search result page with header similar to profile page-->
+		</ul>
+	</div>
+	<div class="smorg-search-tag">
+	<label class="smorg-search-label">Good For:</label>
+		<input class="smorg-search-input" type="text" ng-model="tag" ng-change="searchTag()"><option>item 1</option><option>item 2</option></input>
+	</div>
+	<label class="smorg-search-label">Place/Event:</label>
+		<input class="smorg-search-input" type="text" />
+
+</div>
+
+
+
 <div class="smorg-footmenu">
-	<div class="smorg-item smorg-foot smorg-foot-left"><a href="#"><i class="icon-camera"></i> &nbsp SHARE</a></div>
-	<div class="smorg-item smorg-foot"><a href="#"><i class="icon-search"></i> &nbsp SEARCH</a></div>
+	<div class="smorg-item smorg-foot smorg-foot-left"><i class="icon-camera"></i> &nbsp SHARE</div>
+	<div class="smorg-item smorg-foot" ng-click="showSearch()"><i class="icon-search"></i> &nbsp SEARCH</div>
 </div>
 
 

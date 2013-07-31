@@ -86,6 +86,28 @@ button {
 	z-index:2;
 	border-right: 1px #f0f1f1 solid;
 }
+.smorg-search {
+	position: fixed;
+	bottom: 40px;
+	top: 50%;
+	opacity: .9;
+	background: #f0f1f1;
+	left: 0;
+	right: 0;
+	z-index: 20;
+	visibility: hidden;
+	padding:5px;
+}
+.smorg-search-input {
+	max-width: 90%;
+}
+.smorg-search-results {
+	z-index:21;
+	background: white;
+}
+.smorg-search-ul {
+	
+}
 
 /* Profile Page */
 .back-button-div {

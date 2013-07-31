@@ -80,10 +80,30 @@ function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDat
   }
 }
 
-function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDatabase) {
+function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDatabase, SearchTag) {
  $scope.activities = ActivityDatabase.query();
  $scope.isCollapsed = true;
  $scope.scroll = 0;
+
+ $scope.showSearch = function() {
+    var search_div = $('.smorg-search');
+    if (search_div.css("visibility") === "hidden") {
+      search_div.css("visibility","visible");
+  }
+  else {
+    search_div.css("visibility","hidden");
+  }
+}
+
+  $scope.searchTag = function() {
+    if ($scope.tag) {
+    $scope.tag_results = SearchTag.query({tag: $scope.tag});
+    }
+    else {
+      $scope.tag_results = [];
+    }
+  }
+
 /* $scope.$watch('scroll', function() {
   var navbar = $(".smorg-navbar");
   if ($scope.scroll > 50 && $scope.scroll < 90) {
