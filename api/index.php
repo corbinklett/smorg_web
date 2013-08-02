@@ -29,19 +29,48 @@ function getUser($user, $password) { //login by verifying user
 	$pass = $password;
 	$pass = sha1($salt1 . $password . $salt2);
 	$mysqli = getConnection();
-	$result = $mysqli->query("SELECT * FROM member WHERE user = '$user' and pass = '$pass'");
-	$member = $result->fetch_object();
-	echo json_encode($member);
-	$mysqli->close();
+	//more secure way of handeling user input
+	if($stmt = $mysqli -> prepare("SELECT * FROM members WHERE user = ? and pass = ?")){
+		/* Bind parameter   s- string, b - blob, i - int, etc */
+		$stmt -> bind_param("ss", $user, $pass);
+		
+		/* Execute the statement */
+		$stmt -> execute();
+
+		/* Bind results */
+		$stmt -> bind_result($result);
+
+		/* Fetch the value */
+		$member = $stmt -> fetch_object();
+
+		echo json_encode($member);
+		$stmt -> close();
+		$mysqli->close();
+
+	}
 
 }
 
 function checkUsername($user) { //check username when signing up new member
 	$mysqli = getConnection();
-	$result = $mysqli->query("SELECT * FROM member WHERE user = '$user'");
-	$member = $result->fetch_object();
-	echo json_encode($member);
-	$mysqli->close();
+	if($stmt = $mysqli -> prepare("SELECT * FROM members WHERE user = ?")){
+		/* Bind parameter   s- string, b - blob, i - int, etc */
+		$stmt -> bind_param("s", $user);
+		
+		/* Execute the statement */
+		$stmt -> execute();
+
+		/* Bind results */
+		$stmt -> bind_result($result);
+
+		/* Fetch the value */
+		$member = $stmt -> fetch_object();
+
+		echo json_encode($member);
+		$stmt -> close();
+		$mysqli->close();
+
+	}
 }
 
 function addUser() { //save new member to database
@@ -199,14 +228,26 @@ function postActivity() {
 }
 
 function searchTag($tag) {
-	$sql = "select tag_text from tag where tag_text like '$tag" . "%' limit 20";
+	//$sql = "select tag_text from tag where tag_text like '$tag" . "%' limit 20";
 	$mysqli = getConnection();
-	$result = $mysqli->query($sql);
-	while($row = $result->fetch_assoc()) {
-		$rows[] = $row;
+	if($result = $mysqli -> prepare("select tag_text from tag where tag_text like ?' .'% limit 20")){
+		/* Bind parameter   s- string, b - blob, i - int, etc */
+		$result -> bind_param("s", $tag);
+		
+		/* Execute the statement */
+		$result -> execute();
+
+		/* Bind results */
+		$result -> bind_result($r);
+
+		//$result = $mysqli->query($sql);
+		while($row = $result->fetch_assoc()) {
+			$rows[] = $row;
+		}
+		echo json_encode($rows);
+		$result -> close();
+		$mysqli->close();
 	}
-	echo json_encode($rows);
-	$mysqli->close();
 
 }
 
