@@ -14,6 +14,8 @@ $app->get('/login/:username/:password', 'getUser'); //for use with Login form
 $app->get('/login/:username', 'checkUsername'); //for use with Signup form
 $app->post('/login', 'addUser'); //for use with Signup form - add new user
 $app->get('/profile/:id', 'getUserInfo'); //get user info for profile page
+$app->get('/profile_activities/:id', 'getProfileActivities'); //get activity ID's for profile page
+$app->get('/profile_following/:id' ,'getProfileFollowing'); //get ID's of those the user is following
 $app->get('/activity', 'getActivities'); 
 $app->get('/activity/:id', 'getFriendActivities'); //pass member ID to get friends activities
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
@@ -63,26 +65,31 @@ function getUserInfo($id) { //get member info for profile page
 	$sql = "select *, (select count(*) from favorite inner join activity on favorite.id_activity = activity.id_activity where activity.id_member = $id) as fav_count, (select count(*) from friendship where id_member_friend = $id) as followers from member where id_member = $id";
 	$result = $mysqli->query($sql);
 	$member = $result->fetch_object();
-	$member = json_encode($member);
-	$result->close();
-
-	$sql = "select id_activity, title from activity where id_member = $id";
-	$result = $mysqli->query($sql);
-	$activities = $result->fetch_object();
-	$activities = json_encode($activities);
-	$result->close();
-
-	$sql = "select id_member_friend from friendship where id_member = $id";
-	$result = $mysqli->query($sql);
-	$followers = $result->fetch_object();
-	$followers = json_encode($follower);
+	echo json_encode($member);
 	$result->close();
 	$mysqli->close();
+}
 
-	$member.activities = $activities;
-	$member.follower_ids = $followers;
+function getProfileActivities($id) {
+	$sql = "select id_activity, title from activity where id_member = $id";
+	$result = $mysqli->query($sql);
+	while($row = $result->fetch_assoc()) {
+		$activities[] = $row;
+	}
+	echo json_encode($activities);
+	$result->close();
+	$mysqli->close();
+}
 
-	echo $member;
+function getProfileFollowing($id) {
+	$sql = "select id_member_friend from friendship where id_member = $id";
+	$result = $mysqli->query($sql);
+	while($row = $result->fetch_assoc()) {
+		$following[] = $row;
+	}
+	echo json_encode($following);
+	$result->close();
+	$mysqli->close();
 }
 
 function getActivities() {

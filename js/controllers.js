@@ -140,7 +140,7 @@ $scope.submitSearch = function(tags) {
   }
 }
 
-function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase) {
+function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase, ProfileDatabaseActivity, ProfileDatabaseFollowing) {
   $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
 
   $scope.goToProfile = function(id) {
