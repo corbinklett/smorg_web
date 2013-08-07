@@ -165,12 +165,14 @@ function LogoutCtrl($scope) {
 
 }
 
-function SearchResCtrl($scope, $routeParams, $cookies) {
-  var tags = $routeParams.search_tags.split(",");
+function SearchResCtrl($scope, $routeParams, $cookies, SearchResults) {
+  console.log($routeParams.search_tags);
+  $scope.results = SearchResults.get({array: $routeParams.search_tags});
+  /*var tags_array = $routeParams.search_tags.split(",");
   console.log(tags);
   angular.forEach(tags, function(value, key) {
     console.log(value);
-  });
+  }); */
 }
 
 function UploadCtrl($scope, $cookies, SearchTag) {

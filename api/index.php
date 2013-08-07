@@ -20,6 +20,7 @@ $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
 $app->get('/favorites/:id', 'getFavorites'); //query a user's favorite items
 $app->post('/post_activity', 'postActivity');
 $app->get('/search_tag/:tag', 'searchTag');
+$app->get('/search_results/:array', 'getSearchedActivities');
 
 $app->run();
 
@@ -210,6 +211,9 @@ function searchTag($tag) {
 
 }
 
+function getSearchedActivities() {
+	echo 'get searched activities!';
+}
 
 function getConnection() {
 	$db_hostname = 'localhost';

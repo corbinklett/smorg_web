@@ -25,9 +25,14 @@ angular.module('services', ['ngResource']).
 }).
 	factory('SearchTag', function($resource) {
 		//var SearchTag = $resource('../api/index.php/search_tag/:tag');
-		
-		return SearchTag;var SearchTag = $resource('http://smorgasbored.com/api/index.php/search_tag/:tag');
-	});
+		var SearchTag = $resource('http://smorgasbored.com/api/index.php/search_tag/:tag');
+		return SearchTag;
+}).
+	factory('SearchResults', function($resource) {
+		//var SearchResults = $resource('../api/index.php/search_results/:array');
+		var SearchResults = $resource('http://smorgasbored.com/api/index.php/search_results/:array');
+		return SearchResults;		
+});
 
 
 
