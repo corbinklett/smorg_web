@@ -15,7 +15,7 @@ $routeProvider.
     when('/profile/:id', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).
     when('/home', {templateUrl: 'partials/home.html', controller: HomeCtrl}).    
     when('/logout', {templateUrl: 'partials/logout.html', controller: LogoutCtrl}).
-    when('/search_results/:search_tags', {templateUrl: 'partials/search_results.html', controller:SearchResCtrl}).
+    when('/search_results/:search_tags/:tag_text', {templateUrl: 'partials/search_results.html', controller:SearchResCtrl}).
     when('/upload', {templateUrl: 'partials/upload.html', controller: UploadCtrl}).
     otherwise({redirectTo: '/login'});
   }]);

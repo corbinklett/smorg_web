@@ -60,7 +60,6 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
 }
 
 function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDatabase) {
-  $(".chosen-select").chosen()
   $scope.activities = ActivityDatabase.query({id:$cookies.id_member});
   $scope.isCollapsed = true;
 
@@ -115,10 +114,12 @@ $scope.select2Options = {
 
 $scope.submitSearch = function(tags) {
   var search_tags = [];
+  var tag_text = [];
   angular.forEach(tags, function(value, key) {
     search_tags.push(value["id"]);
+    tag_text.push(value["text"]);
   });
-  $location.path('/search_results/' + search_tags);
+  $location.path('/search_results/' + search_tags + '/' + tag_text);
 }
 
   $scope.favoriteItem = function(id) {
@@ -139,9 +140,8 @@ $scope.submitSearch = function(tags) {
   }
 }
 
-function ProfileCtrl($scope, stellar, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase) {
+function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase) {
   $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
-   stellar.against(window);
 
   $scope.goToProfile = function(id) {
     $location.path('/profile/' + id);
@@ -165,14 +165,28 @@ function LogoutCtrl($scope) {
 
 }
 
-function SearchResCtrl($scope, $routeParams, $cookies, SearchResults) {
-  console.log($routeParams.search_tags);
-  $scope.results = SearchResults.get({array: $routeParams.search_tags});
-  /*var tags_array = $routeParams.search_tags.split(",");
-  console.log(tags);
-  angular.forEach(tags, function(value, key) {
-    console.log(value);
-  }); */
+function SearchResCtrl($scope, $routeParams, $cookies, $location, SearchResults, FavoritesDatabase) {
+  var tags = $routeParams.tag_text;
+  $scope.activities = SearchResults.query({array: $routeParams.search_tags, text:tags});
+  $scope.isCollapsed = true;
+  $scope.tags = tags.replace(',', ', ');
+
+  $scope.favoriteItem = function(id) {
+      
+    var saveObject = new FavoritesDatabase(); 
+    saveObject.id_activity = id; 
+    saveObject.user =  $cookies.user; 
+    saveObject.$save(); 
+    
+    var button_id = 'star_' + id;
+    var img = document.getElementById(button_id);
+    img.setAttribute("src", "img/icons/star_yellow.png");
+  }
+
+  $scope.goToProfile = function(id) {
+    $location.path('/profile/' + id);
+  }
+
 }
 
 function UploadCtrl($scope, $cookies, SearchTag) {

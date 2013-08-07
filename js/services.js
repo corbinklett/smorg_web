@@ -29,8 +29,8 @@ angular.module('services', ['ngResource']).
 		return SearchTag;
 }).
 	factory('SearchResults', function($resource) {
-		//var SearchResults = $resource('../api/index.php/search_results/:array');
-		var SearchResults = $resource('http://smorgasbored.com/api/index.php/search_results/:array');
+		//var SearchResults = $resource('../api/index.php/search_results/:array/:text');
+		var SearchResults = $resource('http://smorgasbored.com/api/index.php/search_results/:array/:text');
 		return SearchResults;		
 });
 

@@ -20,7 +20,7 @@ $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
 $app->get('/favorites/:id', 'getFavorites'); //query a user's favorite items
 $app->post('/post_activity', 'postActivity');
 $app->get('/search_tag/:tag', 'searchTag');
-$app->get('/search_results/:array', 'getSearchedActivities');
+$app->get('/search_results/:array/:text', 'getSearchedActivities');
 
 $app->run();
 
@@ -63,8 +63,26 @@ function getUserInfo($id) { //get member info for profile page
 	$sql = "select *, (select count(*) from favorite inner join activity on favorite.id_activity = activity.id_activity where activity.id_member = $id) as fav_count, (select count(*) from friendship where id_member_friend = $id) as followers from member where id_member = $id";
 	$result = $mysqli->query($sql);
 	$member = $result->fetch_object();
-	echo json_encode($member);
+	$member = json_encode($member);
+	$result->close();
+
+	$sql = "select id_activity, title from activity where id_member = $id";
+	$result = $mysqli->query($sql);
+	$activities = $result->fetch_object();
+	$activities = json_encode($activities);
+	$result->close();
+
+	$sql = "select id_member_friend from friendship where id_member = $id";
+	$result = $mysqli->query($sql);
+	$followers = $result->fetch_object();
+	$followers = json_encode($follower);
+	$result->close();
 	$mysqli->close();
+
+	$member.activities = $activities;
+	$member.follower_ids = $followers;
+
+	echo $member;
 }
 
 function getActivities() {
@@ -211,8 +229,40 @@ function searchTag($tag) {
 
 }
 
-function getSearchedActivities() {
-	echo 'get searched activities!';
+function getSearchedActivities($array) {
+	$tags_arr = str_getcsv($array, ',');
+	$sql_part = '';
+	$i = 1; $arr_length = count($tags_arr);
+	foreach ($tags_arr as $tag) {
+		$sql_part .= 'id_tag = ' . $tag;
+			if ($i < $arr_length) $sql_part .= ' or ';	
+		$i++;
+	}
+	
+	$sql = "select * from activity where id_activity in (select id_activity from goodfor where $sql_part) limit 16";
+	$mysqli = getConnection();
+	$result = $mysqli->query($sql);
+	while($row = $result->fetch_assoc()) {
+		$activities[] = $row;
+	}
+	$result->close();
+
+	$i = 0;
+	foreach($activities as $activity) {
+		$id_activity = $activity["id_activity"];
+		$sql = "select tag_text from tag inner join goodfor on tag.id_tag = goodfor.id_tag where goodfor.id_activity = $id_activity";
+		$result = $mysqli->query($sql);
+		$goodfor = '';
+		while($row = $result->fetch_assoc()) {
+			$goodfor = $row["tag_text"] . ", " . $goodfor;
+		}
+		$goodfor = substr($goodfor, 0, strlen($goodfor)-2);
+		$activities[$i]["goodfor"] = $goodfor;
+		$i++;
+	}
+	echo json_encode($activities);
+	$result->close();
+
 }
 
 function getConnection() {
