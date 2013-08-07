@@ -25,8 +25,8 @@ angular.module('services', ['ngResource']).
 }).
 	factory('SearchTag', function($resource) {
 		//var SearchTag = $resource('../api/index.php/search_tag/:tag');
-		var SearchTag = $resource('http://smorgasbored.com/api/index.php/search_tag/:tag');
-		return SearchTag;
+		
+		return SearchTag;var SearchTag = $resource('http://smorgasbored.com/api/index.php/search_tag/:tag');
 	});
 
 

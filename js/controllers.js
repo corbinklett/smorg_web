@@ -60,6 +60,7 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
 }
 
 function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDatabase) {
+  $(".chosen-select").chosen()
   $scope.activities = ActivityDatabase.query({id:$cookies.id_member});
   $scope.isCollapsed = true;
 
@@ -80,7 +81,8 @@ function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDat
   }
 }
 
-function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDatabase, SearchTag) {
+function CityCtrl($scope, $cookies, $location, $http, ActivityDatabase, FavoritesDatabase, SearchTag) {
+
  $scope.activities = ActivityDatabase.query();
  $scope.isCollapsed = true;
  $scope.scroll = 0;
@@ -95,22 +97,29 @@ function CityCtrl($scope, $cookies, $location, ActivityDatabase, FavoritesDataba
   }
 }
 
-  $scope.searchTag = function() {
-    if ($scope.tag) {
-    $scope.tag_results = SearchTag.query({tag: $scope.tag});
-    }
-    else {
-      $scope.tag_results = [];
-    }
-  }
+$scope.tags = [];
 
-/* $scope.$watch('scroll', function() {
-  var navbar = $(".smorg-navbar");
-  if ($scope.scroll > 50 && $scope.scroll < 90) {
-    navbar.css({"top": 50 - $scope.scroll});
-  }
-});*/
- 
+$scope.select2Options = {
+  minimumInputLength: 1,
+  maximumSelectionSize: 3,
+  query: function(query) {
+    var data = {results: []};
+    $http.get('http://smorgasbored.com/api/index.php/search_tag/' + query.term).success(function(info) {
+      angular.forEach(info, function(value, key) {
+        data.results.push({id: value["id_tag"], text: value["tag_text"]});
+      });
+    query.callback(data); 
+    });
+  }  
+}
+
+$scope.submitSearch = function(tags) {
+  var search_tags = [];
+  angular.forEach(tags, function(value, key) {
+    search_tags.push(value["id"]);
+  });
+  $location.path('/search_results/' + search_tags);
+}
 
   $scope.favoriteItem = function(id) {
     
@@ -154,6 +163,14 @@ function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase) {
 
 function LogoutCtrl($scope) {
 
+}
+
+function SearchResCtrl($scope, $routeParams, $cookies) {
+  var tags = $routeParams.search_tags.split(",");
+  console.log(tags);
+  angular.forEach(tags, function(value, key) {
+    console.log(value);
+  });
 }
 
 function UploadCtrl($scope, $cookies, SearchTag) {

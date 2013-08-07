@@ -12,14 +12,15 @@
   	<link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
   	<link type="text/css" rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
     <link type="text/css" rel="stylesheet" href="css/bootstrap-social-buttons.css">
-    <link type="text/css" rel="stylesheet" href="lib/chosen_v1.0.0/chosen.min.css">
+    <link type="text/css" rel="stylesheet" href="lib/select2-3.4.1/select2.css">
+
 </head>
 
 <body ng-controller="MainCtrl">
 
 	<div id="content" ng-view></div>
 
-	<script src="lib/jquery-1.9.1.js"></script>
+	<script src="lib/jquery-1.9.1.js"></script> <!-- jQuery must be loaded before Angular -->
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-resource.js"></script>
 	<script src="lib/angular/angular-cookies.js"></script>
@@ -30,7 +31,7 @@
 	<script src="js/directives.js"></script>
 	<script src="js/imageupload.js"></script> <!--may get rid of this image upload directive-->
 	<script src="js/ng-upload.js"></script>
-	<script src="lib/chosen_v1.0.0/chosen.jquery.min.js"></script>
-
+	<script src="lib/select2-3.4.1/select2.js"></script>
+	<script src="lib/angular-ui-select2/select2.js"></script>
 </body>
 </html>

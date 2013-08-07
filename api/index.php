@@ -199,7 +199,7 @@ function postActivity() {
 }
 
 function searchTag($tag) {
-	$sql = "select tag_text from tag where tag_text like '$tag" . "%' limit 20";
+	$sql = "select id_tag, tag_text from tag where tag_text like '$tag" . "%' limit 20";
 	$mysqli = getConnection();
 	$result = $mysqli->query($sql);
 	while($row = $result->fetch_assoc()) {
