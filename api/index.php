@@ -101,6 +101,8 @@ function findFriend($my_id, $visiting_id) {
 	if($result = $mysqli->query($sql)) {
 		echo 'true';
 	}
+	$result->close();
+	$mysqli->close();
 }
 
 function getActivities() {
