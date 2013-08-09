@@ -16,6 +16,7 @@ $app->post('/login', 'addUser'); //for use with Signup form - add new user
 $app->get('/profile/:id', 'getUserInfo'); //get user info for profile page
 $app->get('/profile_activities/:id', 'getProfileActivities'); //get activity ID's for profile page
 $app->get('/profile_following/:id' ,'getProfileFollowing'); //get ID's of those the user is following
+$app->get('/find_friend/:myId/:visitingId', 'findFriend'); //check if I am following the profile I am visiting
 $app->get('/activity', 'getActivities'); 
 $app->get('/activity/:id', 'getFriendActivities'); //pass member ID to get friends activities
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
@@ -92,6 +93,14 @@ function getProfileFollowing($id) {
 	echo json_encode($following);
 	$result->close();
 	$mysqli->close();
+}
+
+function findFriend($my_id, $visiting_id) {
+	$sql = "select * from friendship where id_member = $my_id and $id_member_friend = $visiting_id";
+	$mysqli = getConnection();
+	if($result = $mysqli->query($sql)) {
+		echo 'true';
+	}
 }
 
 function getActivities() {

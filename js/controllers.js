@@ -164,19 +164,14 @@ function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $locatio
   ]; */
 
   //determine whose profile this is for follow button
-  $scope.whoami = [];
   if (profile_id = $cookies.id_member) {
     $scope.whoami = "myprofile";
   }
-  else if (FindFriend.get({myId: $cookies.id_member, visitingId: profile_id}) {
+  else if (FindFriend.get({myId: $cookies.id_member, visitingId: profile_id}) == true) {
     $scope.whoami = "following"
   }
   else {
     $scope.whoami = []; 
-  }
-
-  $scope.goToProfile = function(id) {
-    $location.path('/profile/' + id);
   }
 
   $scope.followMember = function(id) {
