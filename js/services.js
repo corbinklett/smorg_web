@@ -28,9 +28,14 @@ angular.module('services', ['ngResource']).
 		return ProfileDatabase;
 }).
 	factory('ProfileDatabaseFollowing', function($resource) {
-		//var ProfileDatabase = $resource('../api/index.php/profile/:id')
+		//var ProfileDatabase = $resource('../api/index.php/profile_following/:id')
 		var ProfileDatabase = $resource('http://smorgasbored.com/api/index.php/profile_following/:id');
 		return ProfileDatabase;
+}).
+	factory('FindFriend', function($resource) {
+		//var ProfileDatabase = $resource('../api/index.php/find_friend/:myId/:visitingId')
+		var FindFriend = $resource('http://smorgasbored.com/api/index.php/find_friend/:myId/:visitingId');
+		return FindFriend;
 }).
 	factory('SearchTag', function($resource) {
 		//var SearchTag = $resource('../api/index.php/search_tag/:tag');

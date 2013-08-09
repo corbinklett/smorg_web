@@ -10,7 +10,11 @@
 		<p>{{ memberdata.about }}</p><br /><br />
 		<h1>Reposted:</h1><p> {{ memberdata.fav_count }}</p><br />
 		<h1>Followers:</h1><p> {{ memberdata.followers }}</p><br />
-		<button>FOLLOW</button>
+		<div ng-switch on="whoami">
+			<span ng-switch-when="myprofile"></span>
+			<button ng-switch-when="following" ng-click="unfollowMember(memberdata.id_member)">FOLLOWING</button>
+			<button ng-switch-default ng-click="followMember(memberdata.id_member)">FOLLOW</button>
+		</div>
 	</div>
 </div>
 
@@ -19,13 +23,20 @@
 		THINGS
 	</div>
 	<div class="activity-contents">
-		<br /><br />
+		<div class="smorg-profile-user-uploads" ng-repeat="activity in activities">
+			<img src="img/activity/{{ activity.id_activity }}.png"/>
+			<div class="smorg-profile-title">{{ activity.title }}</div>
+		</div>
 	</div>
+
 	<div class="activity-heading">
 		FOLLOWING
 	</div>
 	<div class="activity-contents">
-		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />AHHHH!
+		<div class="smorg-profile-user-following" ng-repeat="friend in following">
+			<img src="img/users/{{ friend.id_member_friend }}.png"/>
+			<!--<div class="smorg-profile-title">{{ activity.title }}</div>-->
+		</div>
 	</div>
 
 </div>

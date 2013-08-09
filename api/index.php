@@ -72,6 +72,7 @@ function getUserInfo($id) { //get member info for profile page
 
 function getProfileActivities($id) {
 	$sql = "select id_activity, title from activity where id_member = $id";
+	$mysqli = getConnection();
 	$result = $mysqli->query($sql);
 	while($row = $result->fetch_assoc()) {
 		$activities[] = $row;
@@ -83,6 +84,7 @@ function getProfileActivities($id) {
 
 function getProfileFollowing($id) {
 	$sql = "select id_member_friend from friendship where id_member = $id";
+	$mysqli = getConnection();
 	$result = $mysqli->query($sql);
 	while($row = $result->fetch_assoc()) {
 		$following[] = $row;

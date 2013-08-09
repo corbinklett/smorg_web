@@ -140,11 +140,50 @@ $scope.submitSearch = function(tags) {
   }
 }
 
-function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase, ProfileDatabaseActivity, ProfileDatabaseFollowing) {
-  $scope.memberdata = ProfileDatabase.get({id:$routeParams.id});
+function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase, ProfileDatabaseActivity, ProfileDatabaseFollowing, FindFriend) {
+  var profile_id = $routeParams.id;
+  $scope.memberdata = ProfileDatabase.get({id: profile_id});
+  /*$scope.activities = [
+    {"id_activity": "3", "title":"Title"},
+    {"id_activity": "1", "title":"Title2"},
+    {"id_activity": "2", "title":"Title3"},
+    {"id_activity": "4", "title":"Title4"},
+    {"id_activity": "7", "title":"Title5"},
+    {"id_activity": "6", "title":"Title6"}
+  ]; */
+  
+  $scope.activities = ProfileDatabaseActivity.query({id: profile_id});
+  $scope.following = ProfileDatabaseFollowing.query({id: profile_id});
+  /*$scope.following = [
+    {"id_member_friend": "27"},
+    {"id_member_friend": "28"},
+    {"id_member_friend": "29"},
+    {"id_member_friend": "30"},
+    {"id_member_friend": "31"},
+    {"id_member_friend": "32"}
+  ]; */
+
+  //determine whose profile this is for follow button
+  $scope.whoami = [];
+  if (profile_id = $cookies.id_member) {
+    $scope.whoami = "myprofile";
+  }
+  else if (FindFriend.get({myId: $cookies.id_member, visitingId: profile_id}) {
+    $scope.whoami = "following"
+  }
+  else {
+    $scope.whoami = []; 
+  }
 
   $scope.goToProfile = function(id) {
     $location.path('/profile/' + id);
+  }
+
+  $scope.followMember = function(id) {
+    alert(id);
+  }
+  $scope.unfollowMember = function(id) {
+    alert(id);
   }
 }
 
