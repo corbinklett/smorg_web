@@ -1,4 +1,3 @@
-<div scroll-position="scroll"></div>
 <div class="smorg-navbar">
 	<div class="smorg-item"><a href="#/city">CITY</a></div>
 	<div class="smorg-item"><a href="#/friends">FRIENDS</a></div>
@@ -6,27 +5,20 @@
 </div>
 
 <div class="activity-container">
-  <accordion close-others="oneAtATime">
-    <accordion-group heading="{{group.title}}" ng-repeat="group in groups" class="accordian-header">
-      {{group.content}}
-    </accordion-group>
-  </accordion>
+	<span class="smorg-home-subtitle">upcoming</span>
+	<div class="smorg-home-content">
+		upcoming div
+	</div>
 
-<!--
-<article ng-repeat="favorite in favorites">
-	<div class="activity">
-		<img src="img/activity/{{ favorite.id_activity }}.png" ng-click="isCollapsed=!isCollapsed">
-		<div class="button-group">
-			<button class="activity-button"><img src="img/icons/star_yellow.png" id="star_{{ favorite.id_activity }}"></button>
-			<button class="activity-button"><img src="img/icons/share.png"></button>
-			<button class="profile-pic" ng-click="goToProfile(favorite.id_member)"><img src="img/users/{{ favorite.id_member }}.png"></button>
-		</div>
+	<span class="smorg-home-subtitle">favorites</span>
+	<div class="smorg-home-content">
+
 	</div>
-	<div collapse="isCollapsed" class="collapse-div" id="{{ favorite.id_activity }}">
-		<span class="activity-span title">{{ favorite.title }}</span><br />
-		<span class="activity-span description">Description: {{ favorite.description }}</span><br />
-		<span class="activity-span goodfor">good for: </span><span class="activity-span description">{{ favorite.goodfor }}</span>
-	</div>
-</article>
--->
+
+</div>
+
+
+
+<div class="smorg-footmenu">
+	<div class="smorg-footer-item-home"><center><i class="icon-camera"></i> &nbsp SHARE</center></div>
 </div>

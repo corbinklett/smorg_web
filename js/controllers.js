@@ -197,11 +197,9 @@ function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase) {
   $scope.oneAtATime = true;
   $scope.isCollapsed = true;
   $scope.groups = [
-  {"title":"RECEIVED"},
-  {"title":"STARRED"},
-  {"title":"ADD CATEGORY"},
-  {"title":"SENT"},
-  {"title":"EDIT"}];
+  {"title":"Upcoming"},
+  {"title":"Favorited"}
+  ];
 
 }
 
@@ -230,7 +228,7 @@ function SearchResCtrl($scope, $routeParams, $cookies, $location, SearchResults,
   $scope.goToProfile = function(id) {
     $location.path('/profile/' + id);
   }
-
+  
 }
 
 function UploadCtrl($scope, $cookies, SearchTag) {
