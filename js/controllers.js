@@ -46,7 +46,7 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
           pobject.lastname = $scope.member.lastname;
           pobject.email = $scope.member.email; 
           pobject.$save( {}, function(data, headers) {
-            alert(JSON.stringify(data));
+            alert('set cookie?' + JSON.stringify(data));
           //  $cookies.id_member = data["0"]+data["1"];
           });
             $cookies.user = $scope.member.username;
@@ -140,7 +140,7 @@ $scope.submitSearch = function(tags) {
   }
 }
 
-function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase, ProfileDatabaseActivity, ProfileDatabaseFollowing, FindFriend) {
+function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase, ProfileDatabaseActivity, ProfileDatabaseFollowing, FindFriend, FollowMember, UnfollowMember) {
   var profile_id = $routeParams.id;
   $scope.memberdata = ProfileDatabase.get({id: profile_id});
   /*$scope.activities = [
@@ -162,23 +162,33 @@ function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $locatio
     {"id_member_friend": "31"},
     {"id_member_friend": "32"}
   ]; */
-
   //determine whose profile this is for follow button
-  if (profile_id = $cookies.id_member) {
-    $scope.whoami = "myprofile";
-  }
-  else if (FindFriend.get({myId: $cookies.id_member, visitingId: profile_id}) == true) {
-    $scope.whoami = "following"
-  }
-  else {
-    $scope.whoami = []; 
-  }
+  FindFriend.get({myId: $cookies.id_member, visitingId: profile_id}, function(data) {
+    if (profile_id == $cookies.id_member) {
+      $scope.whoami = [];
+    }
+    else if (data.id_member_friend == profile_id) {
+      $scope.whoami = "following";
+    }
+    else {
+      $scope.whoami = "notfollowing"; 
+    }
+  });
 
-  $scope.followMember = function(id) {
-    alert(id);
+  $scope.followMember = function() {
+    $scope.whoami = "following";
+    var pobject = new FollowMember(); 
+    pobject.id_member = $cookies.id_member; 
+    pobject.id_member_friend = profile_id;  
+    pobject.$save();
+
   }
-  $scope.unfollowMember = function(id) {
-    alert(id);
+  $scope.unfollowMember = function() {
+    $scope.whoami = "notfollowing";
+    var pobject = new UnfollowMember(); 
+    pobject.id_member = $cookies.id_member; 
+    pobject.id_member_friend = profile_id;  
+    pobject.$save();
   }
 }
 

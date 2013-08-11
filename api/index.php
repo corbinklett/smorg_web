@@ -17,6 +17,8 @@ $app->get('/profile/:id', 'getUserInfo'); //get user info for profile page
 $app->get('/profile_activities/:id', 'getProfileActivities'); //get activity ID's for profile page
 $app->get('/profile_following/:id' ,'getProfileFollowing'); //get ID's of those the user is following
 $app->get('/find_friend/:myId/:visitingId', 'findFriend'); //check if I am following the profile I am visiting
+$app->post('/follow_member', 'followMember'); 
+$app->post('/unfollow_member', 'unfollowMember');
 $app->get('/activity', 'getActivities'); 
 $app->get('/activity/:id', 'getFriendActivities'); //pass member ID to get friends activities
 $app->post('/favorites', 'saveFavorite'); //save activity ID to member's profile
@@ -96,12 +98,33 @@ function getProfileFollowing($id) {
 }
 
 function findFriend($my_id, $visiting_id) {
-	$sql = "select * from friendship where id_member = $my_id and $id_member_friend = $visiting_id";
+	$sql = "select * from friendship where id_member = $my_id and id_member_friend = $visiting_id";
 	$mysqli = getConnection();
 	if($result = $mysqli->query($sql)) {
-		echo 'true';
+		$row = $result->fetch_assoc();
+		echo json_encode($row);
 	}
 	$result->close();
+	$mysqli->close();
+}
+
+function followMember() {
+	$app = \Slim\Slim::getInstance();
+	$request = $app->request();
+	$task = json_decode($request->getBody());
+	$mysqli = getConnection();
+	$sql = "insert into `friendship` (`id_member`, `id_member_friend`) values ($task->id_member, $task->id_member_friend)";
+	$mysqli->query($sql);
+	$mysqli->close();
+}
+
+function unfollowMember() {
+	$app = \Slim\Slim::getInstance();
+	$request = $app->request();
+	$task = json_decode($request->getBody());
+	$mysqli = getConnection();
+	$sql = "delete from friendship where id_member = $task->id_member and id_member_friend = $task->id_member_friend";
+	$mysqli->query($sql);
 	$mysqli->close();
 }
 

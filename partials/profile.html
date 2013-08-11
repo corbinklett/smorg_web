@@ -11,9 +11,9 @@
 		<h1>Reposted:</h1><p> {{ memberdata.fav_count }}</p><br />
 		<h1>Followers:</h1><p> {{ memberdata.followers }}</p><br />
 		<div ng-switch on="whoami">
-			<span ng-switch-when="myprofile"></span>
-			<button ng-switch-when="following" ng-click="unfollowMember(memberdata.id_member)">FOLLOWING</button>
-			<button ng-switch-default ng-click="followMember(memberdata.id_member)">FOLLOW</button>
+			<span ng-switch-default></span>
+			<button ng-switch-when="following" ng-click="unfollowMember()">FOLLOWING</button>
+			<button ng-switch-when="notfollowing" ng-click="followMember()">FOLLOW</button>
 		</div>
 	</div>
 </div>
