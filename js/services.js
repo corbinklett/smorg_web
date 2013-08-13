@@ -56,6 +56,11 @@ angular.module('services', ['ngResource']).
 		//var SearchResults = $resource('../api/index.php/search_results/:array/:text');
 		var SearchResults = $resource('http://smorgasbored.com/api/index.php/search_results/:array/:text');
 		return SearchResults;		
+}).	
+	factory('UpcomingActivities', function($resource) {
+		//var UpcomingActivities = $resource('../api/index.php/upcoming/:id');
+		var UpcomingActivities = $resource('http://smorgasbored.com/api/index.php/upcoming/:id');
+		return UpcomingActivities;		
 });
 
 

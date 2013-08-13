@@ -251,17 +251,29 @@ button {
 	text-align:center;
 	color: #f0f1f1;
 }
+.smorg-home-container {
+	position:relative;
+	top:40px;
+	margin-left: 5px;
+	margin-right: 5px;
+	bottom:40px;
+
+}
 .smorg-home-subtitle {
-	font-size: 24px;
+	float:left;
+	clear:left;
+	font-size: 26px;
 	margin-left: 20px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	display: inline-block;
 }
 .smorg-home-content{
-	position: relative;
 	display: inline-block;
 	float:left;
+	clear: left;
 	width:100%;
 	border: black 1px solid;
-
 }
 
 

@@ -26,6 +26,7 @@ $app->get('/favorites/:id', 'getFavorites'); //query a user's favorite items
 $app->post('/post_activity', 'postActivity');
 $app->get('/search_tag/:tag', 'searchTag');
 $app->get('/search_results/:array/:text', 'getSearchedActivities');
+$app->get('/upcoming/:id', 'getUpcoming'); //fetch upcoming events
 
 $app->run();
 
@@ -305,7 +306,22 @@ function getSearchedActivities($array) {
 	}
 	echo json_encode($activities);
 	$result->close();
+}
 
+function getUpcoming($id) {
+	$mysqli = getConnection();
+	$sql = "select id_activity, title from activity where id_activity in" &_
+		"(select id_activity from conversation inner join shared on conversation.id_conversation = " &_
+		"shared.id_conversation where shared.id_member_participant = $id)";
+	$result = $mysqli->query($sql);
+
+	while($row = $result->fetch_assoc()) {
+		$rows[] = $row;
+	}
+
+	echo json_encode($rows);
+	$result->close();
+	$mysqli->close();
 }
 
 function getConnection() {

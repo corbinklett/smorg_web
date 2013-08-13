@@ -192,15 +192,9 @@ function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $locatio
   }
 }
 
-function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase) {
+function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase, UpcomingActivities) {
   $scope.favorites = FavoritesDatabase.query({id: $cookies.id_member}); 
-  $scope.oneAtATime = true;
-  $scope.isCollapsed = true;
-  $scope.groups = [
-  {"title":"Upcoming"},
-  {"title":"Favorited"}
-  ];
-
+  $scope.upcoming = UpcomingActivities.query({id: $cookies.id_member});
 }
 
 function LogoutCtrl($scope) {
@@ -228,7 +222,7 @@ function SearchResCtrl($scope, $routeParams, $cookies, $location, SearchResults,
   $scope.goToProfile = function(id) {
     $location.path('/profile/' + id);
   }
-  
+
 }
 
 function UploadCtrl($scope, $cookies, SearchTag) {
