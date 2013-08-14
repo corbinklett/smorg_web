@@ -229,6 +229,15 @@ function PostCtrl($scope) {
   $scope.exitPage = function() {
     $scope.$parent.$parent.uploadPage = '';
   }
+
+  $scope.nextClick = function() {
+    var urlStr = $scope.$parent.$parent.uploadPage;
+    var urlNum = urlStr.split('/');
+    urlNum = (urlNum[urlNum.length - 1]).split('.');
+    urlNum = urlNum[0].replace(/^\D+/g, '');
+    urlNum++;
+    $scope.$parent.$parent.uploadPage = "partials/upload/post" + urlNum + ".html";
+  }
 }
 
 function UploadCtrl($scope, $cookies, SearchTag) {
