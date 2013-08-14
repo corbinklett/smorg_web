@@ -51,6 +51,7 @@ button {
 	opacity:.7;
 }
 
+
 /* Login and Signup */
 .login-box {
 	position: relative;
@@ -274,6 +275,24 @@ button {
 	clear: left;
 	width:100%;
 	border: black 1px solid;
+}
+
+/* Upload pages */
+.smorg-post-partial {
+	z-index: 20;
+	position: fixed;
+	height:100%;
+	width:100%;
+	margin: 0;
+	background: #e9e9f5;
+	opacity: .9;
+}
+.smorg-post-close {
+	position:absolute;
+	top:0;
+	right:0;
+	height:30px;
+	width:30px;
 }
 
 

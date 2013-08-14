@@ -1,3 +1,5 @@
+<ng-include src="uploadPage"></ng-include>
+
 <div class="smorg-navbar">
 	<div class="smorg-item smorg-active"><a href="#/city">CITY</a></div>
 	<div class="smorg-item"><a href="#/friends">FRIENDS</a></div>
@@ -64,7 +66,7 @@
 
 
 <div class="smorg-footmenu">
-	<div class="smorg-item smorg-foot smorg-foot-left"><i class="icon-camera"></i> &nbsp SHARE</div>
+	<div class="smorg-item smorg-foot smorg-foot-left" ng-click="uploadPage='partials/upload/post1.html'"><i class="icon-camera"></i> &nbsp SHARE</div>
 	<div class="smorg-item smorg-foot" ng-click="showSearch()"><i class="icon-search"></i> &nbsp SEARCH</div>
 </div>
 

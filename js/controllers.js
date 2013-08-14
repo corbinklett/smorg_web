@@ -225,6 +225,12 @@ function SearchResCtrl($scope, $routeParams, $cookies, $location, SearchResults,
 
 }
 
+function PostCtrl($scope) {
+  $scope.exitPage = function() {
+    $scope.$parent.$parent.uploadPage = '';
+  }
+}
+
 function UploadCtrl($scope, $cookies, SearchTag) {
     $scope.id_member = $cookies.id_member;
 
