@@ -59,7 +59,7 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
   }
 }
 
-function FollowingCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDatabase) {
+function FollowingCtrl($scope, $cookies, ActivityDatabase, $location, $http, FavoritesDatabase, SearchTag) {
   $scope.activities = ActivityDatabase.query({id:$cookies.id_member});
   $scope.isCollapsed = true;
 
@@ -78,6 +78,43 @@ function FollowingCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesD
     $scope.goToProfile = function(id) {
     $location.path('/profile/' + id);
   }
+
+  $scope.showSearch = function() {
+    var search_div = $('.smorg-search');
+    if (search_div.css("visibility") === "hidden") {
+      search_div.css("visibility","visible");
+    }
+    else {
+      search_div.css("visibility","hidden");
+    }  
+  }
+
+  /* search feature */
+  $scope.tags = [];
+  $scope.select2Options = {
+    minimumInputLength: 1,
+    maximumSelectionSize: 3,
+    query: function(query) {
+      var data = {results: []};
+      $http.get('http://smorgasbored.com/api/index.php/search_tag/' + query.term).success(function(info) {
+        angular.forEach(info, function(value, key) {
+          data.results.push({id: value["id_tag"], text: value["tag_text"]});
+        });
+      query.callback(data); 
+      });
+    }  
+  }
+
+  $scope.submitSearch = function(tags) {
+    var search_tags = [];
+    var tag_text = [];
+    angular.forEach(tags, function(value, key) {
+      search_tags.push(value["id"]);
+      tag_text.push(value["text"]);
+    });
+    $location.path('/search_results/' + search_tags + '/' + tag_text);
+  }
+  /* end search feature */
 }
 
 function CityCtrl($scope, $cookies, $location, $http, ActivityDatabase, FavoritesDatabase, SearchTag) {
