@@ -59,7 +59,7 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
   }
 }
 
-function FriendsCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDatabase) {
+function FollowingCtrl($scope, $cookies, ActivityDatabase, $location, FavoritesDatabase) {
   $scope.activities = ActivityDatabase.query({id:$cookies.id_member});
   $scope.isCollapsed = true;
 

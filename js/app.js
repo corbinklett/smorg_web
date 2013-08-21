@@ -10,7 +10,7 @@ smorg.config(['$routeProvider', function($routeProvider) {
 $routeProvider.    
     when('/login', {templateUrl: 'partials/login.html', controller: LoginCtrl}).
     when('/signup', {templateUrl: 'partials/signup.html', controller: SignupCtrl}).
-    when('/friends', {templateUrl: 'partials/friends.html', controller: FriendsCtrl}).
+    when('/following', {templateUrl: 'partials/following.html', controller: FollowingCtrl}).
     when('/city', {templateUrl: 'partials/city.html', controller: CityCtrl}).
     when('/profile/:id', {templateUrl: 'partials/profile.html', controller: ProfileCtrl}).
     when('/home', {templateUrl: 'partials/home.html', controller: HomeCtrl}).    
