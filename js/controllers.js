@@ -225,16 +225,40 @@ function SearchResCtrl($scope, $routeParams, $cookies, $location, SearchResults,
 
 }
 
-function PostCtrl($scope) {
+function PostCtrl($scope, $rootScope) {
+
+
+  var urlStr = $scope.$parent.$parent.uploadPage;
+  var urlNum = urlStr.split('/');
+  urlNum = (urlNum[urlNum.length - 1]).split('.');
+  urlNum = urlNum[0].replace(/^\D+/g, '');
+
+  if (urlNum == '1') {
+      var uploadScope = $rootScope.$new(true); //true clears the inherited properties
+      uploadScope.activity = [];
+  }
+
+  /*
+  $scope.$watch('activity', function(newValues, oldValues) {
+    //when an activity property changes, add it to uploadScope
+    //uploadScope.activity.push($scope.activity);
+    console.log('new values ' + newValues);
+    console.log('old values ' + oldValues);
+  }); 
+  */
   $scope.exitPage = function() {
     $scope.$parent.$parent.uploadPage = '';
   }
 
   $scope.nextClick = function() {
-    var urlStr = $scope.$parent.$parent.uploadPage;
-    var urlNum = urlStr.split('/');
-    urlNum = (urlNum[urlNum.length - 1]).split('.');
-    urlNum = urlNum[0].replace(/^\D+/g, '');
+   // uploadScope.activity.push($scope.activity);
+   // alert(JSON.stringify(uploadScope.activity));
+   // alert(urlNum);
+      var urlStr = $scope.$parent.$parent.uploadPage;
+  var urlNum = urlStr.split('/');
+  urlNum = (urlNum[urlNum.length - 1]).split('.');
+  urlNum = urlNum[0].replace(/^\D+/g, '');
+
     urlNum++;
     $scope.$parent.$parent.uploadPage = "partials/upload/post" + urlNum + ".html";
   }

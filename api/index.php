@@ -310,9 +310,7 @@ function getSearchedActivities($array) {
 
 function getUpcoming($id) {
 	$mysqli = getConnection();
-	$sql = "select id_activity, title from activity where id_activity in" &_
-		"(select id_activity from conversation inner join shared on conversation.id_conversation = " &_
-		"shared.id_conversation where shared.id_member_participant = $id)";
+	$sql = "select id_activity, title from activity where id_activity in (select id_activity from conversation inner join shared on conversation.id_conversation = shared.id_conversation where shared.id_member_participant = $id)";
 	$result = $mysqli->query($sql);
 
 	while($row = $result->fetch_assoc()) {

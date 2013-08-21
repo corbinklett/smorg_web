@@ -292,8 +292,9 @@ button {
 	position:fixed;
 	top:0;
 	right:0;
-	height:30px;
-	width:30px;
+	height:35px;
+	width:35px;
+	font-size: 24px;
 }
 .smorg-post-next {
 	z-index: 21;
@@ -312,6 +313,33 @@ button {
 }
 .smorg-post-subtitle{
 	font-size:15px;
+}
+.smorg-post-input {
+	width:100%;
+	display: inline-block;
+	z-index:21;
+	position: fixed;
+	top:135px;
+}
+input.smorg-post-text-input {
+	/*background: url('../img/users/26.png') no-repeat;
+	background-size: contain;*/
+	background-color: #f2f2fc;
+	border-radius: 0;
+	border:none;
+	box-shadow:none;
+	font-family: "lato", sans-serif;
+	font-size: 12px;
+	height: 35px;
+}
+input:focus {
+	outline: none;
+}
+.smorg-post-photo {
+	z-index: 21;
+	position: fixed;
+	top: 105px;
+	width:100%;
 }
 
 
