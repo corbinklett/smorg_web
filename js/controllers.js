@@ -7,7 +7,9 @@ function MainCtrl($scope) {
 }
 
 function LoginCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
-  
+
+  if ($cookies.user) $location.path('/following');
+
   $scope.signUpClick = function() {
     $location.path('/signup');
   }
@@ -60,6 +62,7 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
 }
 
 function FollowingCtrl($scope, $cookies, ActivityDatabase, $location, $http, FavoritesDatabase, SearchTag) {
+  if (!$cookies.user) $location.path('/login');
   $scope.activities = ActivityDatabase.query({id:$cookies.id_member});
   $scope.isCollapsed = true;
 
@@ -118,7 +121,7 @@ function FollowingCtrl($scope, $cookies, ActivityDatabase, $location, $http, Fav
 }
 
 function CityCtrl($scope, $cookies, $location, $http, ActivityDatabase, FavoritesDatabase, SearchTag) {
-
+ if (!$cookies.user) $location.path('/login');
  $scope.activities = ActivityDatabase.query();
  $scope.isCollapsed = true;
  $scope.scroll = 0;
@@ -178,6 +181,7 @@ $scope.submitSearch = function(tags) {
 }
 
 function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $location, ProfileDatabase, ProfileDatabaseActivity, ProfileDatabaseFollowing, FindFriend, FollowMember, UnfollowMember) {
+  if (!$cookies.user) $location.path('/login');
   var profile_id = $routeParams.id;
   $scope.memberdata = ProfileDatabase.get({id: profile_id});
   /*$scope.activities = [
@@ -229,16 +233,19 @@ function ProfileCtrl($scope, $cookies, $routeParams, FavoritesDatabase, $locatio
   }
 }
 
-function HomeCtrl($scope, $cookies, $routeParams, FavoritesDatabase, UpcomingActivities) {
+function HomeCtrl($scope, $cookies, $routeParams, $location, FavoritesDatabase, UpcomingActivities) {
+  if (!$cookies.user) $location.path('/login');
   $scope.favorites = FavoritesDatabase.query({id: $cookies.id_member}); 
   $scope.upcoming = UpcomingActivities.query({id: $cookies.id_member});
-}
 
-function LogoutCtrl($scope) {
-
+  $scope.logoutClick = function() {
+    delete $cookies.user; delete $cookies.firstname; delete $cookies.lastname; delete $cookies.id_member;
+    $location.path('/login');
+  }
 }
 
 function SearchResCtrl($scope, $routeParams, $cookies, $location, SearchResults, FavoritesDatabase) {
+  if (!$cookies.user) $location.path('/login');
   var tags = $routeParams.tag_text;
   $scope.activities = SearchResults.query({array: $routeParams.search_tags, text:tags});
   $scope.isCollapsed = true;
@@ -261,7 +268,8 @@ function SearchResCtrl($scope, $routeParams, $cookies, $location, SearchResults,
   }
 }
 
-function PostCtrl($scope, $rootScope, localStorageService) {
+function PostCtrl($scope, $rootScope, localStorageService, $cookies, $location) {
+  if (!$cookies.user) $location.path('/login');
   $scope.nextClick = function(data) {
     var urlStr = $scope.$parent.$parent.uploadPage;
     var urlNum = urlStr.split('/');

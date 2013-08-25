@@ -219,10 +219,12 @@ button {
 }
 .profile-activities-container {
 	position: relative;
+	display:block;
 	top: 60px;
 	margin-left: 5px;
 	margin-right:5px;
 	bottom:0;
+	overflow:hidden;
 	background-color: rgba(230, 230, 230, .8);
 }
 .activity-heading {
@@ -236,12 +238,11 @@ button {
 }
 .activity-contents {
 	position:relative;
-	float:left;
 	margin-bottom: 10px;
 }
 .smorg-profile-user-uploads {
 	position: relative;
-	float: left;
+	display:inline-block;
 	margin-left:5%;
 	margin-top: 2.5%;
 	width: 42.5%;
@@ -255,7 +256,7 @@ button {
 }
 .smorg-profile-user-following {
 	position: relative;
-	float: left;
+	display:inline-block;
 	margin-left:2%;
 	margin-top: 2.5%;
 	width: 30%;
@@ -274,11 +275,12 @@ button {
 }
 .smorg-home-container {
 	position:relative;
+	display: block;
+	overflow:hidden;
 	top:40px;
 	margin-left: 5px;
 	margin-right: 5px;
 	bottom:40px;
-
 }
 .smorg-home-subtitle {
 	float:left;
@@ -295,6 +297,10 @@ button {
 	clear: left;
 	width:100%;
 	border: black 1px solid;
+}
+.smorg-logout-button {
+	display: inline-block;
+	clear: both;
 }
 
 /* Upload pages */
