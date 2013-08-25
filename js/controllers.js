@@ -21,7 +21,7 @@ function LoginCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
           $cookies.lastname = $scope.member.lastname;
           $cookies.id_member = data.id_member;
           $rootScope.$broadcast('loggedin', $cookies.user);
-          $location.path('/friends');
+          $location.path('/following');
         }
         else {
           $scope.member.loginErr = 'Incorrect Username/Password';
@@ -53,7 +53,7 @@ function SignupCtrl($scope, $location, MemberDatabase, $cookies, $rootScope) {
             $cookies.firstname = $scope.member.firstname;
             $cookies.lastname = $scope.member.lastname;
             $rootScope.$broadcast('loggedin', $cookies.user);
-            $location.path('/friends');             
+            $location.path('/following');             
          }
      });
   }
